@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <groupId>org.jboss.seam</groupId>
-        <artifactId>examples</artifactId>
-        <version>2.3.1-SNAPSHOT</version>
-    </parent>
-    
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.seam.examples</groupId>
     <artifactId>itext</artifactId>
+    <version>2.3.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Itext Example (EE6)</name>
   
@@ -16,7 +11,6 @@
         <module>itext-ejb</module>
         <module>itext-web</module>
         <module>itext-ear</module>
-        <module>itext-tests</module>
     </modules>
     
     <properties>
@@ -25,6 +19,7 @@
     
     <dependencyManagement>
         <dependencies>
+            <!-- Modules -->
             <dependency>
                 <groupId>org.jboss.seam.examples.itext</groupId>
                 <artifactId>itext-ejb</artifactId>
@@ -42,6 +37,15 @@
                 <artifactId>itext-ear</artifactId>
                 <version>${project.version}</version>
                 <type>ear</type>
+            </dependency>
+            
+            <!-- BOMs -->
+            <dependency>
+                <groupId>org.jboss.seam</groupId>
+                <artifactId>bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

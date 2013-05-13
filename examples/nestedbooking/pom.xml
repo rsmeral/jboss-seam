@@ -3,11 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.seam.examples</groupId>
     <artifactId>nestedbooking</artifactId>
-    <parent>
-        <groupId>org.jboss.seam</groupId>
-        <artifactId>examples</artifactId>
-        <version>2.3.1-SNAPSHOT</version>
-    </parent>
+<version>2.3.1-SNAPSHOT</version>
+    
     <packaging>pom</packaging>
     <name>Nested Booking Example (EE6)</name>
     
@@ -19,11 +16,12 @@
         <module>nestedbooking-ear</module>
         <module>nestedbooking-ejb</module>
         <module>nestedbooking-web</module>
-        <module>nestedbooking-tests</module>
+        
     </modules>
     
     <dependencyManagement>
         <dependencies>
+            <!-- Modules -->
             <dependency>
                 <groupId>org.jboss.seam.examples.nestedbooking</groupId>
                 <artifactId>nestedbooking-ejb</artifactId>
@@ -41,6 +39,5 @@
                 <artifactId>nestedbooking-ear</artifactId>
                 <version>${project.version}</version>
             </dependency>
-        </dependencies>
-    </dependencyManagement>
+        <!-- BOMs -->             <dependency>                 <groupId>org.jboss.seam</groupId>                 <artifactId>bom</artifactId>                 <version>${project.version}</version>                 <type>pom</type>                 <scope>import</scope>             </dependency> </dependencies></dependencyManagement>
 </project>

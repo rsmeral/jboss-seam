@@ -3,11 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.seam.examples</groupId>
     <artifactId>seamdiscs</artifactId>
-    <parent>
-        <groupId>org.jboss.seam</groupId>
-        <artifactId>examples</artifactId>
-        <version>2.3.1-SNAPSHOT</version>
-    </parent>
+<version>2.3.1-SNAPSHOT</version>
+    
     <packaging>pom</packaging>
     <name>Seamdiscs Example</name>
     
@@ -19,11 +16,12 @@
         <module>seamdiscs-ear</module>
         <module>seamdiscs-ejb</module>
         <module>seamdiscs-web</module>
-        <module>seamdiscs-tests</module>
+        
     </modules>
     
     <dependencyManagement>
         <dependencies>
+            <!-- Modules -->
             <dependency>
                 <groupId>org.jboss.seam.examples.seamdiscs</groupId>
                 <artifactId>seamdiscs-ejb</artifactId>
@@ -53,6 +51,5 @@
                 <artifactId>trinidad-impl</artifactId>
                 <version>2.0.1</version>
             </dependency>            
-        </dependencies>
-    </dependencyManagement>
+        <!-- BOMs -->             <dependency>                 <groupId>org.jboss.seam</groupId>                 <artifactId>bom</artifactId>                 <version>${project.version}</version>                 <type>pom</type>                 <scope>import</scope>             </dependency> </dependencies></dependencyManagement>
 </project>

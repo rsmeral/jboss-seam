@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <artifactId>examples</artifactId>
-        <groupId>org.jboss.seam</groupId>
-        <version>2.3.1-SNAPSHOT</version>
-    </parent>
+    
     
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jboss.seam.examples</groupId>
     <artifactId>rss</artifactId>
+<version>2.3.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Rss Example (EE6)</name>
   
@@ -16,7 +13,7 @@
         <module>rss-ejb</module>
         <module>rss-web</module>
         <module>rss-ear</module>
-        <module>rss-tests</module>
+        
     </modules>
     
     <properties>
@@ -25,6 +22,7 @@
     
     <dependencyManagement>
         <dependencies>
+            <!-- Modules -->
             <dependency>
                 <groupId>org.jboss.seam.examples.rss</groupId>
                 <artifactId>rss-ejb</artifactId>
@@ -42,7 +40,6 @@
                 <artifactId>rss-ear</artifactId>
                 <version>${project.version}</version>
             </dependency>
-        </dependencies>
-    </dependencyManagement>
+        <!-- BOMs -->             <dependency>                 <groupId>org.jboss.seam</groupId>                 <artifactId>bom</artifactId>                 <version>${project.version}</version>                 <type>pom</type>                 <scope>import</scope>             </dependency> </dependencies></dependencyManagement>
     
 </project>

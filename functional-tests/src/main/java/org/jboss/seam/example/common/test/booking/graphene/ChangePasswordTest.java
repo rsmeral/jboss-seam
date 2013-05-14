@@ -19,32 +19,35 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.seam.example.common.test.booking.selenium;
+package org.jboss.seam.example.common.test.booking.graphene;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import static org.testng.AssertJUnit.*;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
- * This class tests change password funcionality.
- * 
+ * This class tests change password functionality.
+ *
  * @author jbalunas
  * @author jharting
- * 
+ *
  */
-public class ChangePasswordTest extends SeleniumBookingTest {
+@RunAsClient
+@RunWith(Arquillian.class)
+public class ChangePasswordTest extends BookingFunctionalTestBase {
 
-    private final static String LONG_TEXT = "testertestertest";
-    private final static String SHORT_TEXT = "tt";
+    protected final static String LONG_TEXT = "testertestertest";
+    protected final static String SHORT_TEXT = "tt";
     // overriding default values
-    private final String USERNAME = "gavin";
-    private final String PASSWORD = "foobar";
+    protected final String USERNAME = "gavin";
+    protected final String PASSWORD = "foobar";
 
+    @Before
     @Override
-    @BeforeMethod
     public void setUp() {
-        browser = startBrowser();
         assertTrue("Login failed.", login(USERNAME, PASSWORD));
     }
 
@@ -55,21 +58,12 @@ public class ChangePasswordTest extends SeleniumBookingTest {
     @Test
     public void changePasswordTest() {
         changePassword("password");
-        assertTrue("Password change failed.", browser
-                .isTextPresent(getProperty("PASSWORD_UPDATED_MESSAGE")));
+        assertTrue("Password change failed.", isTextInSource(getProperty("PASSWORD_UPDATED_MESSAGE")));
         logout();
         assertTrue("Login failed.", login(USERNAME, "password"));
         // cleanup - set default password
         changePassword(PASSWORD);
-        try
-        {
-           Thread.sleep(7000);
-        }
-        catch (InterruptedException e)
-        {
-        }
-        assertTrue("Password change failed.", browser
-                .isTextPresent(getProperty("PASSWORD_UPDATED_MESSAGE")));
+        assertTrue("Password change failed.", isTextInSource(getProperty("PASSWORD_UPDATED_MESSAGE")));
         logout();
         assertTrue("Login failed.", login(USERNAME, PASSWORD));
     }
@@ -77,29 +71,25 @@ public class ChangePasswordTest extends SeleniumBookingTest {
     @Test
     public void usingDifferentPasswordsTest() {
         changePassword("password", "password1");
-        assertTrue("Password verification failed", browser
-                .isTextPresent(getProperty("PASSWORD_REENTER_MESSAGE")));
+        assertTrue("Password verification failed", isTextInSource(getProperty("PASSWORD_REENTER_MESSAGE")));
     }
 
     @Test
     public void usingEmptyPasswordsTest() {
         changePassword("", "");
-        assertEquals("Password validation failed", 2, browser
-                .getXpathCount(getProperty("PASSWORD_VALUE_REQUIRED_MESSAGE")));
+        assertEquals("Password validation failed", 2, getXpathCount(getBy("PASSWORD_VALUE_REQUIRED_MESSAGE")));
     }
 
     @Test
     public void usingLongPasswordTest() {
         changePassword(LONG_TEXT, LONG_TEXT);
-        assertTrue("Password validation failed", browser
-                .isTextPresent(getProperty("PASSWORD_LENGTH_MESSAGE")));
+        assertTrue("Password validation failed", isTextInSource(getProperty("PASSWORD_LENGTH_MESSAGE")));
     }
 
     @Test
     public void usingShortPasswordTest() {
         changePassword(SHORT_TEXT, SHORT_TEXT);
-        assertTrue("Password validation failed", browser
-                .isTextPresent(getProperty("PASSWORD_LENGTH_MESSAGE")));
+        assertTrue("Password validation failed", isTextInSource(getProperty("PASSWORD_LENGTH_MESSAGE")));
     }
 
     public void changePassword(String newPassword) {
@@ -107,11 +97,9 @@ public class ChangePasswordTest extends SeleniumBookingTest {
     }
 
     public void changePassword(String newPassword, String verify) {
-        browser.click(getProperty("SETTINGS"));
-        browser.waitForPageToLoad(TIMEOUT);
-        browser.type(getProperty("PASSWORD_PASSWORD"), newPassword);
-        browser.type(getProperty("PASSWORD_VERIFY"), verify);
-        browser.click(getProperty("PASSWORD_SUBMIT"));
-        waitForForm();
+        clickAndWaitHttp(getBy("SETTINGS"));
+        type(getBy("PASSWORD_PASSWORD"), newPassword);
+        type(getBy("PASSWORD_VERIFY"), verify);
+        clickAndWaitHttp(getBy("PASSWORD_SUBMIT"));
     }
 }

@@ -19,47 +19,33 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.seam.example.common.test.webdriver;
+package org.jboss.seam.example.common.test.booking.graphene;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+/**
+ * 
+ * @author jbalunas
+ * @author jharting 
+ *
+ */
 
-public class InternetExplorerAjaxDriver extends InternetExplorerDriver implements AjaxWebDriver
-{
-   
-   private int waitTime;
-   
-   public InternetExplorerAjaxDriver()
-   {
-      this(AjaxWebElement.DEFAULT_WAIT_TIME);
-   }
-   
-   public InternetExplorerAjaxDriver(int waitTime)
-   {
-      this.waitTime = waitTime;
-   }
-   
-   public AjaxWebElement findElement(By by)
-   {
-      return new DelegatedWebElement(super.findElement(by), waitTime);
-   }
-   
-   public void setWaitTime(int millis)
-   {
-      this.waitTime = millis;
-   }
-   
-   public boolean isElementPresent(By by)
-   {
-      try
-      {
-         findElement(by);
-         return true;
-      }
-      catch (NoSuchElementException e)
-      {
-         return false;
-      }
-   }
+@Ignore
+@RunAsClient
+@RunWith(Arquillian.class)
+public class AjaxTest extends BookingFunctionalTestBase {
+
+    @Test
+    public void ajaxSearchFloodTest() {
+        String[] hotels = new String[] { "Marriott Courtyard", "Conrad Miami",
+                "Marriot Downtown", "Ritz Carlton", "NonExistingHotel" };
+        for (int i = 0; i < 30; i++) {
+            for (String hotel : hotels) {
+                enterSearchQuery(hotel);
+            }
+        }
+    }
 }

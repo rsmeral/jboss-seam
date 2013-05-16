@@ -16,7 +16,7 @@
    
     <dependencyManagement>
         <dependencies>
-
+            
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-drone-bom</artifactId>
@@ -33,6 +33,15 @@
                 <type>pom</type>
             </dependency>
 
+            
+            <dependency>
+                <groupId>org.jboss.seam</groupId>
+                <artifactId>bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
         </dependencies>
     </dependencyManagement>
    
@@ -55,34 +64,29 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
-            <version>${version.junit}</version>
         </dependency>
         
         <dependency>
             <groupId>org.jboss.seam</groupId>
             <artifactId>functional-tests</artifactId>
-            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         
         <dependency>
             <groupId>org.jboss.as</groupId>
             <artifactId>jboss-as-arquillian-container-managed</artifactId>
-            <version>${version.jboss.as}</version>
             <scope>test</scope>
         </dependency>
                 
         <dependency>
             <groupId>org.jboss.arquillian.protocol</groupId>
             <artifactId>arquillian-protocol-servlet</artifactId>          
-            <version>${version.org.jboss.arquillian}</version>
             <scope>test</scope>
         </dependency>
         
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <version>${version.org.jboss.arquillian}</version>
             <scope>test</scope>
         </dependency>
         

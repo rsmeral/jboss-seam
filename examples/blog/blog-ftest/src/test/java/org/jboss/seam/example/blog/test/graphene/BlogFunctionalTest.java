@@ -47,7 +47,7 @@ public class BlogFunctionalTest extends SeamGrapheneTest {
     @Deployment(testable = false)
     public static EnterpriseArchive createDeployment() {
         return ShrinkWrap.createFromZipFile(EnterpriseArchive.class,
-                Maven.resolver().resolve(getProperty("EAR_ARTIFACT")).withoutTransitivity().asSingleFile())
+                Maven.resolver().resolve(getProperty("DEPLOYMENT_ARTIFACT")).withoutTransitivity().asSingleFile())
                 .as(EnterpriseArchive.class);
     }
 

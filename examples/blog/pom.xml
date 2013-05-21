@@ -90,6 +90,20 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        
+                
+        <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>blogindexes</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>   
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.jboss.seam.examples</groupId>
+        <artifactId>booking</artifactId>
+        <version>2.3.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    
     <groupId>org.jboss.seam.examples.booking</groupId>
     <artifactId>booking-ftest</artifactId>
-    <version>2.3.1-SNAPSHOT</version>
     <name>Booking Functional Tests Module</name>
     
     <properties>
-        <version.org.jboss.arquillian>1.0.3.Final</version.org.jboss.arquillian>
         <version.org.jboss.arquillian.extension.drone>1.2.0.Alpha2</version.org.jboss.arquillian.extension.drone>
-        <version.shrinkwrap.resolver>2.0.0-beta-2</version.shrinkwrap.resolver>
-        <version.jboss.as>7.2.0.Final</version.jboss.as>
-        <version.junit>4.10</version.junit>
     </properties>
    
     <dependencyManagement>
@@ -21,23 +23,6 @@
                 <groupId>org.jboss.arquillian.extension</groupId>
                 <artifactId>arquillian-drone-bom</artifactId>
                 <version>${version.org.jboss.arquillian.extension.drone}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            
-            <dependency>
-                <groupId>org.jboss.shrinkwrap.resolver</groupId>
-                <artifactId>shrinkwrap-resolver-bom</artifactId>
-                <version>${version.shrinkwrap.resolver}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-
-            
-            <dependency>
-                <groupId>org.jboss.seam</groupId>
-                <artifactId>bom</artifactId>
-                <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

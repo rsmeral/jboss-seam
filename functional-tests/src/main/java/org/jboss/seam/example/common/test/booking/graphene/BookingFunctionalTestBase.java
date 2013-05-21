@@ -25,9 +25,13 @@ import com.google.common.base.Predicate;
 import org.jboss.arquillian.container.test.api.Deployment;
 import static org.jboss.arquillian.graphene.Graphene.*;
 import org.jboss.seam.example.common.test.SeamGrapheneTest;
+import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenResolvedArtifact;
+import org.jboss.shrinkwrap.resolver.api.maven.PackagingType;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -44,10 +48,14 @@ public class BookingFunctionalTestBase extends SeamGrapheneTest {
     private final String DEFAULT_PASSWORD = "demo";
 
     @Deployment(testable = false)
-    public static EnterpriseArchive createDeployment() {
-        return ShrinkWrap.createFromZipFile(EnterpriseArchive.class,
-                Maven.resolver().resolve(getProperty("EAR_ARTIFACT")).withoutTransitivity().asSingleFile())
-                .as(EnterpriseArchive.class);
+    public static Archive<?> createDeployment() {
+        MavenResolvedArtifact artifact = Maven.resolver().resolve(getProperty("DEPLOYMENT_ARTIFACT")).withoutTransitivity().asSingleResolvedArtifact();
+        PackagingType packaging = artifact.getCoordinate().getPackaging();
+        Class<? extends Archive<?>> deploymentClass = EnterpriseArchive.class;
+        if (packaging == PackagingType.WAR) {
+            deploymentClass = WebArchive.class;
+        }
+        return ShrinkWrap.createFromZipFile(deploymentClass, artifact.asFile()).as(deploymentClass);
     }
 
     @Before

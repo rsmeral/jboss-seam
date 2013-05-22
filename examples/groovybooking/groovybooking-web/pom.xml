@@ -17,7 +17,7 @@
 
    <properties>
       <!-- filtering property for components.xml -->
-      <jndiPattern>java:app/groovybooking-ejb/#{ejbName}</jndiPattern>
+      <jndiPattern>java:app/groovybooking-web/#{ejbName}</jndiPattern>
       <debug>true</debug>
       <loadPersistenceUnits>false</loadPersistenceUnits>
       <gmaven.runtime>1.5</gmaven.runtime>

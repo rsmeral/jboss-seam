@@ -11,6 +11,13 @@
         <example.name>groovybooking</example.name>
         
         <version.commons.logging>1.1.1</version.commons.logging>
+        <version.shrinkwrap.resolver>2.0.0-beta-3</version.shrinkwrap.resolver>
+        
+        <version.dependency.plugin>2.5.1</version.dependency.plugin>
+        <version.antrun.plugin>1.7</version.antrun.plugin>
+        <version.build.helper.plugin>1.7</version.build.helper.plugin>
+        <version.surefire.plugin>2.10</version.surefire.plugin>
+        <version.war.plugin>2.1.1</version.war.plugin>
     </properties>
     
     <modules>
@@ -37,7 +44,7 @@
             <dependency>
                 <groupId>org.jboss.shrinkwrap.resolver</groupId>
                 <artifactId>shrinkwrap-resolver-bom</artifactId>
-                <version>2.0.0-beta-3</version>
+                <version>${version.shrinkwrap.resolver}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -59,4 +66,20 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.surefire.plugin}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${version.dependency.plugin}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        
+    </build>
 </project>

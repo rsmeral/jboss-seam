@@ -19,8 +19,14 @@
         
         <version.commons.logging>1.1.1</version.commons.logging>
         <version.slf4j>1.6.1</version.slf4j>
+        <version.shrinkwrap.resolver>2.0.0-beta-3</version.shrinkwrap.resolver>
         
-        <version.ejb-plugin>2.3</version.ejb-plugin>
+        <version.clean.plugin>2.5</version.clean.plugin>
+        <version.dependency.plugin>2.5.1</version.dependency.plugin>
+        <version.surefire.plugin>2.10</version.surefire.plugin>
+        <version.ear.plugin>2.6</version.ear.plugin>
+        <version.war.plugin>2.1.1</version.war.plugin>
+        <version.ejb.plugin>2.3</version.ejb.plugin>
     </properties>
 
     <dependencyManagement>
@@ -48,7 +54,7 @@
             <dependency>
                 <groupId>org.jboss.shrinkwrap.resolver</groupId>
                 <artifactId>shrinkwrap-resolver-bom</artifactId>
-                <version>2.0.0-beta-3</version>
+                <version>${version.shrinkwrap.resolver}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -82,19 +88,20 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <artifactId>maven-ejb-plugin</artifactId>
-                    <version>${version.ejb-plugin}</version>
-                    <configuration>
-                        <ejbVersion>3.1</ejbVersion>
-                    </configuration>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.surefire.plugin}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${version.dependency.plugin}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
         
-                
         <plugins>
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
+                <version>${version.clean.plugin}</version>
                 <configuration>
                     <filesets>
                         <fileset>

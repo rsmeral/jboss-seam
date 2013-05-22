@@ -228,9 +228,16 @@
     
     <build>
         <plugins>
+            
+            <plugin>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <version>${version.ejb.plugin}</version>
+                <configuration>
+                    <ejbVersion>3.1</ejbVersion>
+                </configuration>
+            </plugin>
             <!-- Skip tests by default -->
-            <plugin> 
-                <groupId>org.apache.maven.plugins</groupId>
+            <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>

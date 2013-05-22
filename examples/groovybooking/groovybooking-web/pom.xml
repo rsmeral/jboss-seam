@@ -129,8 +129,8 @@
       <plugins>
          <!-- Can't use gmaven-plugin because hot deployment won't work otherwise -->
          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-antrun-plugin</artifactId>
+            <version>${version.antrun.plugin}</version>
             <executions>
                <execution>
                   <id>compile-groovy-files</id>
@@ -184,6 +184,7 @@
          <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
+            <version>${version.build.helper.plugin}</version>
             <executions>
                <execution>
                   <id>add-source</id>
@@ -208,6 +209,7 @@
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-war-plugin</artifactId>
+            <version>${version.war.plugin}</version>
             <configuration>
                <webResources>
                   <resource>
@@ -220,28 +222,4 @@
          </plugin>
       </plugins>
    </build>
-
-   <profiles>
-      <profile>
-         <id>ftest-jbossas</id>
-         <build>
-            <plugins>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-antrun-plugin</artifactId>
-                  <executions>
-                     <execution>
-                        <id>wait-for-application</id>
-                        <phase>none</phase>
-                     </execution>
-                     <execution>
-                        <id>stop-selenium</id>
-                        <phase>none</phase>
-                     </execution>
-                  </executions>
-               </plugin>
-            </plugins>
-         </build>
-      </profile>
-   </profiles>
 </project>

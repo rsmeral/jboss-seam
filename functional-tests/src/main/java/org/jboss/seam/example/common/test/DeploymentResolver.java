@@ -1,6 +1,5 @@
 package org.jboss.seam.example.common.test;
 
-import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.importer.ZipImporter;
@@ -13,7 +12,6 @@ import org.jboss.shrinkwrap.resolver.api.maven.PomEquippedResolveStage;
 
 public class DeploymentResolver {
 
-    @Deployment(testable = false)
     public static Archive<?> createDeployment() {
 
         // configure via shrinkwrap-resolver-maven-plugin, to use user-supplied settings.xml

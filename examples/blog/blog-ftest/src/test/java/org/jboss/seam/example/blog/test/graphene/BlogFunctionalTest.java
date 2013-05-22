@@ -25,10 +25,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
+import org.jboss.seam.example.common.test.DeploymentResolver;
 import org.jboss.seam.example.common.test.SeamGrapheneTest;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
-import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.jboss.shrinkwrap.api.Archive;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,10 +44,8 @@ public class BlogFunctionalTest extends SeamGrapheneTest {
     protected String password = "tokyo";
 
     @Deployment(testable = false)
-    public static EnterpriseArchive createDeployment() {
-        return ShrinkWrap.createFromZipFile(EnterpriseArchive.class,
-                Maven.resolver().resolve(getProperty("DEPLOYMENT_ARTIFACT")).withoutTransitivity().asSingleFile())
-                .as(EnterpriseArchive.class);
+    public static Archive<?> createDeployment() {
+        return DeploymentResolver.createDeployment();
     }
 
     @Test

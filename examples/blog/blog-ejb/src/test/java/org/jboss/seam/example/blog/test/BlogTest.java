@@ -37,7 +37,7 @@ public class BlogTest extends JUnitSeamTest {
     @Deployment(name = "BestSellersTest")
     @OverProtocol("Servlet 3.0")
     public static Archive<?> createDeployment() {
-        File[] libs = Maven.resolver().loadPomFromFile("pom.xml").importRuntimeDependencies().asFile();
+        File[] libs = Maven.configureResolverViaPlugin().importRuntimeDependencies().asFile();
 
         WebArchive war = ShrinkWrap.create(WebArchive.class, "seam-blog.war")
                 .addPackages(true, "actions", "domain")

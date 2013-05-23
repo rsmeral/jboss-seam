@@ -9,11 +9,14 @@
     
     <properties>
         <example.name>groovybooking</example.name>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
         <version.commons.logging>1.1.1</version.commons.logging>
         <version.shrinkwrap.resolver>2.0.0-beta-3</version.shrinkwrap.resolver>
         
+        <!-- Plugin versions -->
         <version.dependency.plugin>2.5.1</version.dependency.plugin>
+        <version.resources.plugin>2.6</version.resources.plugin>
         <version.antrun.plugin>1.7</version.antrun.plugin>
         <version.build.helper.plugin>1.7</version.build.helper.plugin>
         <version.surefire.plugin>2.10</version.surefire.plugin>
@@ -70,6 +73,7 @@
     <build>
         <pluginManagement>
             <plugins>
+                <!-- Manage plugin versions for build stability -->
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${version.surefire.plugin}</version>
@@ -77,6 +81,10 @@
                 <plugin>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>${version.dependency.plugin}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${version.resources.plugin}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

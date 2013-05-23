@@ -16,12 +16,15 @@
 
     <properties>
         <example.name>blog</example.name>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         
         <version.commons.logging>1.1.1</version.commons.logging>
         <version.slf4j>1.6.1</version.slf4j>
         <version.shrinkwrap.resolver>2.0.0-beta-3</version.shrinkwrap.resolver>
         
+        <!-- Plugin versions -->
         <version.clean.plugin>2.5</version.clean.plugin>
+        <version.resources.plugin>2.6</version.resources.plugin>
         <version.dependency.plugin>2.5.1</version.dependency.plugin>
         <version.surefire.plugin>2.10</version.surefire.plugin>
         <version.ear.plugin>2.6</version.ear.plugin>
@@ -87,6 +90,7 @@
     <build>
         <pluginManagement>
             <plugins>
+                <!-- Manage plugin versions for build stability -->
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${version.surefire.plugin}</version>
@@ -95,6 +99,10 @@
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>${version.dependency.plugin}</version>
                 </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${version.resources.plugin}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         
@@ -102,6 +110,7 @@
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>${version.clean.plugin}</version>
+                <!-- Delete lucene indexes on clean -->
                 <configuration>
                     <filesets>
                         <fileset>

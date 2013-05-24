@@ -88,6 +88,7 @@
             <dependency>
                 <groupId>org.jboss.seam</groupId>
                 <artifactId>jboss-seam</artifactId>
+                <version>${project.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.testng</groupId>

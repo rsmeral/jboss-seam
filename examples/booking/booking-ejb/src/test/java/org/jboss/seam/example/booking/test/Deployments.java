@@ -9,7 +9,7 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 public class Deployments {
 
     public static WebArchive bookingDeployment() {
-        File[] libs = Maven.resolver().loadPomFromFile("pom.xml").importRuntimeDependencies().asFile();
+        File[] libs = Maven.configureResolverViaPlugin().importRuntimeDependencies().asFile();
 
         return ShrinkWrap.create(WebArchive.class, "seam-booking.war")
                 .addPackage(Booking.class.getPackage())

@@ -10,6 +10,14 @@
     <properties>
         <example.name>booking</example.name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        
+        <!-- To use custom Maven settings and profiles, uncomment and customize
+        the following properties. This is necessary for the ShrinkWrap
+        resolver to function properly. -->
+        <!--<maven.user.settings>/path/to/custom/settings.xml</maven.user.settings>-->
+        <!--<maven.profiles>custom,profile</maven.profiles>-->
         
         <version.commons.logging>1.1.1</version.commons.logging>
         <version.shrinkwrap.resolver>2.0.0-beta-3</version.shrinkwrap.resolver>
@@ -18,6 +26,7 @@
         <version.dependency.plugin>2.5.1</version.dependency.plugin>
         <version.surefire.plugin>2.10</version.surefire.plugin>
         <version.resources.plugin>2.6</version.resources.plugin>
+        <version.compiler.plugin>2.3.1</version.compiler.plugin>
         <version.ear.plugin>2.6</version.ear.plugin>
         <version.war.plugin>2.1.1</version.war.plugin>
         <version.ejb.plugin>2.3</version.ejb.plugin>
@@ -99,6 +108,12 @@
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${version.surefire.plugin}</version>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <org.apache.maven.user-settings>${maven.user.settings}</org.apache.maven.user-settings>
+                            <maven.profiles>${maven.profiles}</maven.profiles>
+                        </systemPropertyVariables>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-dependency-plugin</artifactId>
@@ -107,6 +122,14 @@
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${version.resources.plugin}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${version.compiler.plugin}</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

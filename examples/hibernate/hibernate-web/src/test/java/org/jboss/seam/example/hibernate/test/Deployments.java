@@ -10,12 +10,14 @@ public class Deployments {
 
     public static WebArchive hibernateDeployment() {
 
+        // use profiles defined in 'maven.profiles' property in pom.xml
+        String profilesString = System.getProperty("maven.profiles");
+        String[] profiles = profilesString != null? profilesString.split(", ?") : new String[0];
+        File[] libs = Maven.resolver().loadPomFromFile("pom.xml", profiles).importRuntimeDependencies().asFile();
+
         // Get File reference to src/main/webapp/WEB-INF, to avoid duplication of resources for the test archive
         // Depends on shrinkwrap-resolver-maven-plugin to set the property
-        String pomFile = System.getProperty("maven.execution.pom-file");
-        File webInf = new File(new File(pomFile).getParentFile(), "src/main/webapp/WEB-INF");
-        
-        File[] libs = Maven.configureResolverViaPlugin().importRuntimeDependencies().asFile();
+        File webInf = new File(new File("pom.xml").getParentFile(), "src/main/webapp/WEB-INF");
 
         return ShrinkWrap.create(WebArchive.class, "hibernate-web.war")
                 .addPackage(Booking.class.getPackage())

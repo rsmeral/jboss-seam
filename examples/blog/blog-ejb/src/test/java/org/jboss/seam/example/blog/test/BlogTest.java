@@ -37,7 +37,11 @@ public class BlogTest extends JUnitSeamTest {
     @Deployment(name = "BestSellersTest")
     @OverProtocol("Servlet 3.0")
     public static Archive<?> createDeployment() {
-        File[] libs = Maven.configureResolverViaPlugin().importRuntimeDependencies().asFile();
+
+        // use profiles defined in 'maven.profiles' property in pom.xml
+        String profilesString = System.getProperty("maven.profiles");
+        String[] profiles = profilesString != null? profilesString.split(", ?") : new String[0];
+        File[] libs = Maven.resolver().loadPomFromFile("pom.xml", profiles).importRuntimeDependencies().asFile();
 
         WebArchive war = ShrinkWrap.create(WebArchive.class, "seam-blog.war")
                 .addPackages(true, "actions", "domain")
@@ -58,7 +62,7 @@ public class BlogTest extends JUnitSeamTest {
                 // copied from Web module, modified
                 .addAsWebInfResource("web.xml", "web.xml") // only contains MockSeamListener definition
                 .addAsWebInfResource("components.xml", "components.xml") // corrected ejb component jndi-name references from java:app/jboss-seam to java:app/seam-blog
-                
+
                 // copied from EAR module
                 .addAsWebInfResource("jboss-deployment-structure.xml", "jboss-deployment-structure.xml")
                 .addAsLibraries(libs);

@@ -85,19 +85,6 @@
             </testResource>
         </testResources>
         <plugins>
-            <!-- Allows SWR to use correct Maven settings through Maven.configureResolverViaPlugin() -->
-            <plugin>
-                <groupId>org.jboss.shrinkwrap.resolver</groupId>
-                <artifactId>shrinkwrap-resolver-maven-plugin</artifactId>
-                <version>${version.shrinkwrap.resolver}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>propagate-execution-context</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <!-- Unpack common booking tests from org.jboss.seam:functional-tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

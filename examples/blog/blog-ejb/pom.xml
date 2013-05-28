@@ -163,27 +163,11 @@
                     </testResource>
                 </testResources>
                 <plugins>
-                    <!-- Allows SWR to use correct Maven settings through Maven.configureResolverViaPlugin() -->
-                    <plugin>
-                        <groupId>org.jboss.shrinkwrap.resolver</groupId>
-                        <artifactId>shrinkwrap-resolver-maven-plugin</artifactId>
-                        <version>2.0.0-beta-3</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>propagate-execution-context</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <skip>false</skip>
-                            <systemProperties>
-                                <jacoco.agent>${jacoco.agent}</jacoco.agent>
-                            </systemProperties>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -220,7 +204,7 @@
                     <groupId>org.jboss.as</groupId>
                     <artifactId>jboss-as-arquillian-container-remote</artifactId>
                     <scope>test</scope>
-                </dependency>                
+                </dependency>
             </dependencies>
         </profile>
     </profiles>

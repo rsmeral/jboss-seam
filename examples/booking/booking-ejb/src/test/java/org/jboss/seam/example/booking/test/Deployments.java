@@ -9,7 +9,11 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 public class Deployments {
 
     public static WebArchive bookingDeployment() {
-        File[] libs = Maven.configureResolverViaPlugin().importRuntimeDependencies().asFile();
+        
+        // use profiles defined in 'maven.profiles' property in pom.xml
+        String profilesString = System.getProperty("maven.profiles");
+        String[] profiles = profilesString != null ? profilesString.split(", ?") : new String[0];
+        File[] libs = Maven.resolver().loadPomFromFile("pom.xml", profiles).importRuntimeDependencies().asFile();
 
         return ShrinkWrap.create(WebArchive.class, "seam-booking.war")
                 .addPackage(Booking.class.getPackage())

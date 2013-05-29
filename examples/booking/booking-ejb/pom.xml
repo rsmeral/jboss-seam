@@ -122,13 +122,6 @@
                 <jndiPattern>java:app/seam-booking/#{ejbName}</jndiPattern>
                 <distributable>false</distributable>
             </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.seam</groupId>
-                    <artifactId>jboss-seam</artifactId>
-                    <type>ejb</type>
-                </dependency>
-            </dependencies>
             <build>
                 <testResources>
                     <testResource>

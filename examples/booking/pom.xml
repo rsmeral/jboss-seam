@@ -13,6 +13,10 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
         
+        <!-- To use jacoco, set jacoco.agent system property to something like
+        -javaagent:/path/to/jacocoagent.jar=append=true,destfile=/path/to/output/jacoco.exec -->
+        <jacoco.agent />
+        
         <!-- To use custom Maven settings and profiles, uncomment and customize
         the following properties. This is necessary for the ShrinkWrap
         resolver to function properly. -->
@@ -20,7 +24,7 @@
         <!--<maven.profiles>custom,profile</maven.profiles>-->
         
         <version.commons.logging>1.1.1</version.commons.logging>
-        <version.shrinkwrap.resolver>2.0.0-beta-3</version.shrinkwrap.resolver>
+        <version.shrinkwrap.resolver>2.0.0-beta-4-SNAPSHOT</version.shrinkwrap.resolver>
         
         <!-- Plugin versions -->
         <version.dependency.plugin>2.5.1</version.dependency.plugin>
@@ -30,6 +34,7 @@
         <version.ear.plugin>2.6</version.ear.plugin>
         <version.war.plugin>2.1.1</version.war.plugin>
         <version.ejb.plugin>2.3</version.ejb.plugin>
+        <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
     </properties>
     
     <modules>

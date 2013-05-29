@@ -13,7 +13,11 @@ public class Deployments {
         // use profiles defined in 'maven.profiles' property in pom.xml
         String profilesString = System.getProperty("maven.profiles");
         String[] profiles = profilesString != null ? profilesString.split(", ?") : new String[0];
-        File[] libs = Maven.resolver().loadPomFromFile("pom.xml", profiles).importRuntimeDependencies().asFile();
+        File[] libs = Maven.resolver().loadPomFromFile("pom.xml", profiles)
+                .importCompileAndRuntimeDependencies()
+                // force resolve jboss-seam, because it is provided-scoped in the pom, but we need it bundled in the WAR
+                .resolve("org.jboss.seam:jboss-seam")
+                .withTransitivity().asFile();
 
         return ShrinkWrap.create(WebArchive.class, "seam-booking.war")
                 .addPackage(Booking.class.getPackage())

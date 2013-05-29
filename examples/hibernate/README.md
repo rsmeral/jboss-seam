@@ -1,8 +1,7 @@
-Seam Blog Example
+Seam Hibernate Example
 =================
 
-This example demonstrates the use of Seam in a Java EE environment.
-Transaction and persistence context management is handled by the EJB container.
+This is the Hotel Booking example implemented in Seam and Hibernate POJOs.
 
 Running the example
 -------------------
@@ -15,11 +14,11 @@ To deploy the example to a running JBoss AS instance, follow these steps:
 
 2. Set JBOSS_HOME environment property.
 
-3. In the blog-ear directory run:
+3. In the hibernate-web directory run:
 
     mvn jboss-as:deploy
 
-4. Open this URL in a web browser: http://localhost:8080/seam-blog
+4. Open this URL in a web browser: http://localhost:8080/hibernate-web
 
 
 Testing the example
@@ -57,13 +56,13 @@ Functional tests are located in a separate project and are not run during the bu
 
 Run the functional test on JBoss AS instance with
     
-    mvn -f blog-ftest/pom.xml clean test
+    mvn -f hibernate-ftest/pom.xml clean test
 
 The `JBOSS_HOME` environment variable must be set and point to a JBoss AS instance directory.
 
 To test on a running server, use
 
-    mvn -f blog-ftest/pom.xml clean test -Dremote
+    mvn -f hibernate-ftest/pom.xml clean test -Dremote
 
 Testing in JBDS
 ---------------

@@ -8,7 +8,7 @@
     <properties>
         <version.arquillian>1.0.3.Final</version.arquillian>
         <version.graphene>2.0.0.Alpha4</version.graphene>
-        <version.shrinkwrap.resolver>2.0.0-beta-2</version.shrinkwrap.resolver>
+        <version.shrinkwrap.resolver>2.0.0-beta-4-SNAPSHOT</version.shrinkwrap.resolver>
         <version.junit>4.10</version.junit>
     </properties>
 

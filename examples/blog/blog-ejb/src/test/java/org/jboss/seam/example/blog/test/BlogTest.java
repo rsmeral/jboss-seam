@@ -40,18 +40,21 @@ public class BlogTest extends JUnitSeamTest {
 
         // use profiles defined in 'maven.profiles' property in pom.xml
         String profilesString = System.getProperty("maven.profiles");
-        String[] profiles = profilesString != null? profilesString.split(", ?") : new String[0];
-        File[] libs = Maven.resolver().loadPomFromFile("pom.xml", profiles).importRuntimeDependencies().asFile();
+        String[] profiles = profilesString != null ? profilesString.split(", ?") : new String[0];
+        File[] libs = Maven.resolver().loadPomFromFile("pom.xml", profiles)
+                .importCompileAndRuntimeDependencies()
+                // force resolve jboss-seam, because it is provided-scoped in the pom, but we need it bundled in the WAR
+                .resolve("org.jboss.seam:jboss-seam")
+                .withTransitivity().asFile();
 
         WebArchive war = ShrinkWrap.create(WebArchive.class, "seam-blog.war")
                 .addPackages(true, "actions", "domain")
-                
                 // already in EJB module
                 .addAsWebInfResource("import.sql", "classes/import.sql")
                 .addAsWebInfResource("seam.properties", "classes/seam.properties")
                 .addAsWebInfResource("META-INF/persistence.xml", "classes/META-INF/persistence.xml")
                 
-                // copied from Web module
+                // manually copied from Web module
                 .addAsWebInfResource("pages.xml", "pages.xml")
                 .addAsWebInfResource("accessible.properties", "classes/accessible.properties")
                 .addAsWebInfResource("default.properties", "classes/default.properties")
@@ -59,11 +62,11 @@ public class BlogTest extends JUnitSeamTest {
                 .addAsWebInfResource("infinispan.xml", "classes/infinispan.xml")
                 .addAsWebInfResource("jgroupsConfig.xml", "classes/jgroupsConfig.xml")
                 
-                // copied from Web module, modified
+                // manually copied from Web module, modified
                 .addAsWebInfResource("web.xml", "web.xml") // only contains MockSeamListener definition
                 .addAsWebInfResource("components.xml", "components.xml") // corrected ejb component jndi-name references from java:app/jboss-seam to java:app/seam-blog
 
-                // copied from EAR module
+                // manually copied from EAR module
                 .addAsWebInfResource("jboss-deployment-structure.xml", "jboss-deployment-structure.xml")
                 .addAsLibraries(libs);
 

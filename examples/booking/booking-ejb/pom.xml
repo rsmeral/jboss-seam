@@ -11,7 +11,7 @@
     <groupId>org.jboss.seam.examples.booking</groupId>
     <artifactId>booking-ejb</artifactId>
     <packaging>ejb</packaging>
-    <name>Booking EJB Module</name>
+    <name>Booking EJB Module (EE6)</name>
 
     <dependencies>
         <dependency>

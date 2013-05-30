@@ -11,7 +11,7 @@
     <groupId>org.jboss.seam.examples.booking</groupId>
     <artifactId>booking-ear</artifactId>
     <packaging>ear</packaging>
-    <name>Booking EAR Module</name>
+    <name>Booking EAR Module (EE6)</name>
     
     <dependencies>
         <dependency>

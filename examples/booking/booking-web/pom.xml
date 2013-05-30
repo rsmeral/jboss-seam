@@ -11,7 +11,7 @@
     <groupId>org.jboss.seam.examples.booking</groupId>
     <artifactId>booking-web</artifactId>
     <packaging>war</packaging>
-    <name>Booking Web Module</name>
+    <name>Booking Web Module (EE6)</name>
     
     <properties>
         <!-- filtering property for components.xml -->

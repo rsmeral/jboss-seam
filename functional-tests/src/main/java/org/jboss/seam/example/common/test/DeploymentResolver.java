@@ -20,7 +20,8 @@ public class DeploymentResolver {
         PomEquippedResolveStage mvn = Maven.resolver().loadPomFromFile("pom.xml", profiles);
 
         // resolves an artifact with coordinates given in property DEPLOYMENT_ARTIFACT in /ftest.properties
-        MavenResolvedArtifact artifact = mvn.resolve(SeamGrapheneTest.getProperty("DEPLOYMENT_ARTIFACT")).withoutTransitivity().asSingleResolvedArtifact();
+        MavenResolvedArtifact artifact = mvn.resolve(SeamGrapheneTest.getProperty("DEPLOYMENT_ARTIFACT"))
+                .withoutTransitivity().asSingleResolvedArtifact();
 
         // use correct archive type
         PackagingType packaging = artifact.getCoordinate().getPackaging();
@@ -31,6 +32,7 @@ public class DeploymentResolver {
 
         //  this is ugly due to ARQ-1390; need to get rid of dots in archive name, otherwise it would be
         //  return ShrinkWrap.createFromZipFile(deploymentClass, artifact.asFile()).as(deploymentClass);
-        return ShrinkWrap.create(ZipImporter.class, "test." + packaging).importFrom(artifact.asFile()).as(deploymentClass);
+        return ShrinkWrap.create(ZipImporter.class, artifact.getCoordinate().getArtifactId() + "." + packaging)
+                .importFrom(artifact.asFile()).as(deploymentClass);
     }
 }

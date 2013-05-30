@@ -13,11 +13,9 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
         
-        <!-- To use custom Maven settings and profiles, uncomment and customize
-        the following properties. This is necessary for the ShrinkWrap
-        resolver to function properly. -->
+        <!-- To use custom Maven settings with ShrinkWrap Resolver, uncomment 
+        and customize the following property.  -->
         <!--<maven.user.settings>/path/to/custom/settings.xml</maven.user.settings>-->
-        <!--<maven.profiles>custom,profile</maven.profiles>-->
         
         <version.commons.logging>1.1.1</version.commons.logging>
         <version.shrinkwrap.resolver>2.0.0-beta-4-SNAPSHOT</version.shrinkwrap.resolver>
@@ -107,7 +105,6 @@
                     <configuration>
                         <systemPropertyVariables>
                             <org.apache.maven.user-settings>${maven.user.settings}</org.apache.maven.user-settings>
-                            <maven.profiles>${maven.profiles}</maven.profiles>
                         </systemPropertyVariables>
                     </configuration>
                 </plugin>

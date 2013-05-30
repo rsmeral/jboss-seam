@@ -9,11 +9,8 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 public class Deployments {
 
     public static WebArchive hibernateDeployment() {
-
-        // use profiles defined in 'maven.profiles' property in pom.xml
-        String profilesString = System.getProperty("maven.profiles");
-        String[] profiles = profilesString != null? profilesString.split(", ?") : new String[0];
-        File[] libs = Maven.resolver().loadPomFromFile("pom.xml", profiles)
+        
+        File[] libs = Maven.resolver().loadPomFromFile("pom.xml")
                 .importCompileAndRuntimeDependencies()
                 .resolve().withTransitivity().asFile();
 

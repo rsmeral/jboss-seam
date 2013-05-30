@@ -74,7 +74,7 @@ Testing in JBDS
 
 1. Open JBDS and start a configured instance of JBoss AS
 2. Import the example project and its submodules
-3. In the _Project Explorer_, select the EJB module project, then
+3. In the _Project Explorer_, select the Web module project, then
     1. Type `Ctrl+Alt+P` (_Select Maven Profiles_) and check `integration-tests` and `arq-jbossas-7-remote`
     2. Right-click the module and select _Run As_ - _JUnit Test_
 

@@ -50,10 +50,12 @@ To test on a running server, use
 
 ### Functional tests
 
-Functional tests are located in a separate project and are not run during the build of the example. They test the built archive in an application server through browser-testing. They use:
+Functional tests are located in a separate project and are not executed during the build of the example. They test the built archive in an application server through browser-testing. They use:
 
 * __Arquillian Graphene Extension__ - an advanced Ajax-capable type-safe Selenium-based browser testing tool,
 * __Arquillian Drone Extension__ - to automatically run and stop browser instances.
+
+_Note: It is necessary to first build and install the example, because the functional test resolves the test artifact from the local Maven repository._
 
 Run the functional test on JBoss AS instance with
     

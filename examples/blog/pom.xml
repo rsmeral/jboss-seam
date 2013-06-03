@@ -30,7 +30,7 @@
         
         <version.commons.logging>1.1.1</version.commons.logging>
         <version.slf4j>1.6.1</version.slf4j>
-        <version.shrinkwrap.resolver>2.0.0-beta-4-SNAPSHOT</version.shrinkwrap.resolver>
+        <version.shrinkwrap.resolver>2.0.0-beta-4</version.shrinkwrap.resolver>
         
         <!-- Plugin versions -->
         <version.clean.plugin>2.5</version.clean.plugin>

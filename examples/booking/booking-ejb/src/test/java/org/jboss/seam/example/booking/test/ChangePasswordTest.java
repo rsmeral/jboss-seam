@@ -29,11 +29,7 @@ public class ChangePasswordTest
    @OverProtocol("Servlet 3.0") 
    public static Archive<?> createDeployment()
    {
-      WebArchive war = Deployments.bookingDeployment();
-
-      war.addClasses(ChangePasswordTest.class);
-
-      return war;
+      return Deployments.bookingDeployment();
    }
 
    @Before

@@ -67,8 +67,6 @@ public class BlogTest extends JUnitSeamTest {
                 .addAsWebInfResource("jboss-deployment-structure.xml", "jboss-deployment-structure.xml")
                 .addAsLibraries(libs);
 
-        war.addClasses(BlogTest.class);
-
         return war;
     }
 

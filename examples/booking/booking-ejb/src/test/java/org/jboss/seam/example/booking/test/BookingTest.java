@@ -39,11 +39,7 @@ public class BookingTest
    @OverProtocol("Servlet 3.0") 
    public static Archive<?> createDeployment()
    {
-      WebArchive war = Deployments.bookingDeployment();
-
-      war.addClasses(BookingTest.class);
-
-      return war;
+      return Deployments.bookingDeployment();
    }
 
    @Before

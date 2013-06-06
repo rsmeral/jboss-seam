@@ -60,6 +60,13 @@ To test on a running server, use
 
     mvn clean test -Darquillian=jbossas-remote-7
 
+#### Using Ant
+
+In the example root directory run:
+
+    ant clean test
+
+
 ### Functional tests
 
 Functional tests are located in a separate project and are not executed during the build of the example. They test the built archive in an application server through browser-testing. They use:

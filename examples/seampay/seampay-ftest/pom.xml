@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>   
     <parent>
         <groupId>org.jboss.seam.examples</groupId>
-        <artifactId>blog</artifactId>
+        <artifactId>seampay</artifactId>
         <version>2.3.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     
-    <groupId>org.jboss.seam.examples.blog</groupId>
-    <artifactId>blog-ftest</artifactId>
-    <name>Blog Functional Tests Module (EE6)</name>
+    <groupId>org.jboss.seam.examples.seampay</groupId>
+    <artifactId>seampay-ftest</artifactId>
+    <name>Seampay Example Functional Test (EE6)</name>
 
     <properties>
         <version.org.jboss.arquillian.extension.drone>1.2.0.Alpha2</version.org.jboss.arquillian.extension.drone>
@@ -111,6 +111,38 @@
                 <filtering>true</filtering>
             </testResource>
         </testResources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>process-test-classes</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jboss.wfk.test.seam</groupId>
+                                    <artifactId>functional-tests-common</artifactId>
+                                    <version>${project.version}</version>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>
+                                        ${project.build.directory}/test-classes
+                                    </outputDirectory>
+                                            
+                                    <includes>
+                                        **/seampay/graphene/*
+                                    </includes>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

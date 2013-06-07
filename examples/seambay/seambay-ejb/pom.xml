@@ -18,6 +18,7 @@
             <groupId>org.jboss.seam</groupId>
             <artifactId>jboss-seam</artifactId>
             <type>ejb</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>

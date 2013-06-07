@@ -26,10 +26,7 @@ public class ContactListTest
    @OverProtocol("Servlet 3.0")
    public static Archive<?> createDeployment()
    {
-      WebArchive web = Deployments.contactListDeployment();
-      web.addClasses(ContactListTest.class);
-
-      return web;
+      return Deployments.contactListDeployment();
    }
 
    @Test

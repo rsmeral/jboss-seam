@@ -95,10 +95,6 @@
 			<artifactId>jboss-seam-pdf</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.seam</groupId>
-			<artifactId>jboss-seam-rss</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.jboss.spec.javax.el</groupId>
 			<artifactId>jboss-el-api_2.2_spec</artifactId>
 		</dependency>

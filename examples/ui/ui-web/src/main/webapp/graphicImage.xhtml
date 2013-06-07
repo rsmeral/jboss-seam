@@ -11,7 +11,7 @@
 		<p>Outputs an image</p>
 		<h:panelGrid>
 			<s:fragment>
-				<s:graphicImage value="#{person.picture.data}">
+				<s:graphicImage value="#{person.picture.data}" cache="true" cacheKey="id-0.5">
 					<s:transformImageSize factor="0.5" />
 				</s:graphicImage>
 				<h:outputText value="No image found (upload one)" rendered="#{person.picture.contentType eq null}" />

@@ -26,9 +26,7 @@ public class DocumentTest extends JUnitSeamTest
    @OverProtocol("Servlet 3.0")
    public static Archive<?> createDeployment()
    {
-
-      WebArchive web = Deployments.itextDeployment();
-      return web;
+      return Deployments.itextDeployment();
    }
 
    @Test

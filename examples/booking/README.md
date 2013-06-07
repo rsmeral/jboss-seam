@@ -29,9 +29,9 @@ To deploy the example to a running JBoss AS instance, follow these steps:
 
     ant clean package
 
-2. Copy seam-booking.ear from directory booking-ear/target to the deployment directory of JBoss AS ($JBOSS_HOME/standalone/deployments by default)
+2. Copy `seam-booking.ear` from directory `booking-ear/target` to the deployment directory of JBoss AS `($JBOSS_HOME/standalone/deployments` by default)
 
-3. Open this URL in a web browser: http://localhost:8080/seam-booking 
+3. Open this URL in a web browser: `http://localhost:8080/seam-booking`
 
 
 Testing the example

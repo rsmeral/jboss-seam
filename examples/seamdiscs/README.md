@@ -1,7 +1,29 @@
-Seam UI Example
-===============
+Seam SeamDiscs Example
+======================
 
-This is a simple example demonstrating Seam UI. 
+The seamdiscs example is a simple example built using the Seam Application 
+Framework which allows you to record your favourite albums and artists.  It 
+uses a mix of RichFaces and Trinidad components. It also uses the "inplace 
+editing" pattern; the same facelets are used for editing and display of data 
+(login to edit a disc or artist).
+
+The Seam-Trinidad integration (for now built into the example) provides a 
+`DataModel` which, when backed by a Seam Application Framework Query, provides 
+lazy loading of data for paging, sorting in the Persistence Context and strong 
+row keys.  If you want to use, you'll need to copy the classes in 
+`org.jboss.seam.trinidad` to your own project.  This may be offered as a 
+standalone jar in the Seam project in the future.  One caveat is that you must 
+ensure the rows property on the `<tr:table>` is the same as the `maxResults`
+property on the Query.
+
+Example
+
+    <tr:table value="#{discs.dataModel}" rows="#{discs.maxResults}">
+      <tr:column>
+         ...
+      </tr:column
+    </tr:table>
+
 
 Running the example
 -------------------
@@ -14,11 +36,11 @@ To deploy the example to a running JBoss AS instance, follow these steps:
 
 2. Set JBOSS_HOME environment property.
 
-3. In the ui-ear directory run:
+3. In the seamdiscs-ear directory run:
 
     mvn jboss-as:deploy
 
-4. Open this URL in a web browser: http://localhost:8080/seam-ui
+4. Open this URL in a web browser: http://localhost:8080/seam-seamdiscs
 
 
 Testing the example
@@ -58,13 +80,13 @@ _Note: It is necessary to first build and install the example, because the funct
 
 Run the functional test on JBoss AS instance with
     
-    mvn -f ui-ftest/pom.xml clean test
+    mvn -f seamdiscs-ftest/pom.xml clean test
 
 The `JBOSS_HOME` environment variable must be set and point to a JBoss AS instance directory.
 
 To test on a running server, use
 
-    mvn -f ui-ftest/pom.xml clean test -Dremote
+    mvn -f seamdiscs-ftest/pom.xml clean test -Dremote
 
 Testing in JBDS
 ---------------

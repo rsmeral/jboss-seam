@@ -1,7 +1,7 @@
-Seam UI Example
-===============
+Seam Quartz Example
+===================
 
-This is a simple example demonstrating Seam UI. 
+This example demonstrates the Seam Quartz Timer functionality.
 
 Running the example
 -------------------
@@ -14,11 +14,11 @@ To deploy the example to a running JBoss AS instance, follow these steps:
 
 2. Set JBOSS_HOME environment property.
 
-3. In the ui-ear directory run:
+3. In the quartz-ear directory run:
 
     mvn jboss-as:deploy
 
-4. Open this URL in a web browser: http://localhost:8080/seam-ui
+4. Open this URL in a web browser: http://localhost:8080/seam-quartz
 
 
 Testing the example
@@ -58,13 +58,13 @@ _Note: It is necessary to first build and install the example, because the funct
 
 Run the functional test on JBoss AS instance with
     
-    mvn -f ui-ftest/pom.xml clean test
+    mvn -f quartz-ftest/pom.xml clean test
 
 The `JBOSS_HOME` environment variable must be set and point to a JBoss AS instance directory.
 
 To test on a running server, use
 
-    mvn -f ui-ftest/pom.xml clean test -Dremote
+    mvn -f quartz-ftest/pom.xml clean test -Dremote
 
 Testing in JBDS
 ---------------

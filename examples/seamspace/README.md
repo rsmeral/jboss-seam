@@ -1,10 +1,12 @@
-Seam UI Example
-===============
+Seam Seamspace Example
+======================
 
-This is a simple example demonstrating Seam UI. 
+This example demonstrates Seam Security.
 
 Running the example
 -------------------
+
+### Using Maven
 
 To deploy the example to a running JBoss AS instance, follow these steps:
 
@@ -14,11 +16,21 @@ To deploy the example to a running JBoss AS instance, follow these steps:
 
 2. Set JBOSS_HOME environment property.
 
-3. In the ui-ear directory run:
+3. In the seamspace-ear directory run:
 
     mvn jboss-as:deploy
 
-4. Open this URL in a web browser: http://localhost:8080/seam-ui
+4. Open this URL in a web browser: http://localhost:8080/seam-seamspace
+
+### Using Ant
+
+1. In the example root directory run:
+
+    ant clean package
+
+2. Copy `seam-seamspace.ear` from directory `booking-ear/target` to the deployment directory of JBoss AS (`$JBOSS_HOME/standalone/deployments` by default)
+
+3. Open this URL in a web browser: `http://localhost:8080/seam-seamspace`
 
 
 Testing the example
@@ -47,6 +59,13 @@ To test on a running server, use
 
     mvn clean test -Darquillian=jbossas-remote-7
 
+#### Using Ant
+
+In the example root directory run:
+
+    ant clean test
+
+
 ### Functional tests
 
 Functional tests are located in a separate project and are not executed during the build of the example. They test the built archive in an application server through browser-testing. They use:
@@ -58,13 +77,13 @@ _Note: It is necessary to first build and install the example, because the funct
 
 Run the functional test on JBoss AS instance with
     
-    mvn -f ui-ftest/pom.xml clean test
+    mvn -f seamspace-ftest/pom.xml clean test
 
 The `JBOSS_HOME` environment variable must be set and point to a JBoss AS instance directory.
 
 To test on a running server, use
 
-    mvn -f ui-ftest/pom.xml clean test -Dremote
+    mvn -f seamspace-ftest/pom.xml clean test -Dremote
 
 Testing in JBDS
 ---------------

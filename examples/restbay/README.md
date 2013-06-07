@@ -1,7 +1,8 @@
-Seam UI Example
-===============
+Seam RestBay Example
+====================
 
-This is a simple example demonstrating Seam UI. 
+This example shows Seam/JAX-RS RESTful HTTP webservices integration.
+It runs an EAR.
 
 Running the example
 -------------------
@@ -14,17 +15,17 @@ To deploy the example to a running JBoss AS instance, follow these steps:
 
 2. Set JBOSS_HOME environment property.
 
-3. In the ui-ear directory run:
+3. In the restbay-ear directory run:
 
     mvn jboss-as:deploy
 
-4. Open this URL in a web browser: http://localhost:8080/seam-ui
+4. Open this URL in a web browser: http://localhost:8080/seam-restbay
 
 
 Testing the example
 -------------------
 
-This example is covered by integration and functional tests. All tests use the following technologies:
+This example is covered by integration tests. All tests use the following technologies:
 
 * __Arquillian__ -  as the framework for EE testing, for managing of container lifecycle and deployment of test archive,
 * __ShrinkWrap__ - to create the test archive (WAR).
@@ -47,24 +48,6 @@ To test on a running server, use
 
     mvn clean test -Darquillian=jbossas-remote-7
 
-### Functional tests
-
-Functional tests are located in a separate project and are not executed during the build of the example. They test the built archive in an application server through browser-testing. They use:
-
-* __Arquillian Graphene Extension__ - an advanced Ajax-capable type-safe Selenium-based browser testing tool,
-* __Arquillian Drone Extension__ - to automatically run and stop browser instances.
-
-_Note: It is necessary to first build and install the example, because the functional test resolves the test artifact from the local Maven repository._
-
-Run the functional test on JBoss AS instance with
-    
-    mvn -f ui-ftest/pom.xml clean test
-
-The `JBOSS_HOME` environment variable must be set and point to a JBoss AS instance directory.
-
-To test on a running server, use
-
-    mvn -f ui-ftest/pom.xml clean test -Dremote
 
 Testing in JBDS
 ---------------
@@ -76,10 +59,3 @@ Testing in JBDS
     1. Type `Ctrl+Alt+P` (_Select Maven Profiles_) and check `integration-tests` and `arq-jbossas-7-remote`
     2. Right-click the module and select _Run As_ - _JUnit Test_
 
-### Functional tests
-
-1. Open JBDS and start a configured instance of JBoss AS
-2. Import the `ftest` project of the example
-3. In the _Project Explorer_, select the ftest project, then
-    1. Type `Ctrl+Alt+P` (_Select Maven Profiles_) and activate `arq-remote` profile and deactivate `arq-managed` profile
-    2. Right-click the module and select _Run As_ - _JUnit Test_

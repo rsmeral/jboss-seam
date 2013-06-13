@@ -41,24 +41,24 @@ public class AuctionTest extends JUnitSeamTest
                 .addAsWebInfResource("org/jboss/seam/example/seambay/soap-handlers.xml", "classes/org/jboss/seam/example/seambay/soap-handlers.xml")
 
                 // already in EJB module
-                .addAsWebInfResource("import.sql", "classes/import.sql")
-                .addAsWebInfResource("seam.properties", "classes/seam.properties")
+                .addAsResource("import.sql")
+                .addAsResource("seam.properties")
 
                 .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml")
                 .addAsWebInfResource("META-INF/security-rules.drl", "security-rules.drl")
 
                 // Test specific persistence.xml
-                .addAsWebInfResource("persistence.xml", "classes/META-INF/persistence.xml")
+                .addAsResource("persistence.xml", "META-INF/persistence.xml")
 
                 // manually copied from Web module
-                .addAsWebInfResource("pages.xml", "pages.xml")
+                .addAsWebInfResource("pages.xml")
 
                 // manually copied from Web module, modified
-                .addAsWebInfResource("web.xml", "web.xml") // only contains MockSeamListener definition
-                .addAsWebInfResource("components.xml", "components.xml") // corrected ejb component jndi-name references from java:app/jboss-seam to java:app/seam-blog
+                .addAsWebInfResource("web.xml") // only contains MockSeamListener definition
+                .addAsWebInfResource("components.xml") // corrected ejb component jndi-name references from java:app/jboss-seam to java:app/seam-blog
 
                 // manually copied from EAR module
-                .addAsWebInfResource("jboss-deployment-structure.xml", "jboss-deployment-structure.xml")
+                .addAsWebInfResource("jboss-deployment-structure.xml")
                 .addAsLibraries(libs);
 
       return war;

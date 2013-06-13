@@ -47,24 +47,24 @@ public class BlogTest extends JUnitSeamTest {
         WebArchive war = ShrinkWrap.create(WebArchive.class, "seam-blog.war")
                 .addPackages(true, "actions", "domain")
                 // already in EJB module
-                .addAsWebInfResource("import.sql", "classes/import.sql")
-                .addAsWebInfResource("seam.properties", "classes/seam.properties")
-                .addAsWebInfResource("META-INF/persistence.xml", "classes/META-INF/persistence.xml")
+                .addAsResource("import.sql")
+                .addAsResource("seam.properties")
+                .addAsResource("META-INF/persistence.xml")
                 
                 // manually copied from Web module
-                .addAsWebInfResource("pages.xml", "pages.xml")
-                .addAsWebInfResource("accessible.properties", "classes/accessible.properties")
-                .addAsWebInfResource("default.properties", "classes/default.properties")
-                .addAsWebInfResource("printable.properties", "classes/printable.properties")
-                .addAsWebInfResource("infinispan.xml", "classes/infinispan.xml")
-                .addAsWebInfResource("jgroupsConfig.xml", "classes/jgroupsConfig.xml")
+                .addAsWebInfResource("pages.xml")
+                .addAsResource("accessible.properties")
+                .addAsResource("default.properties")
+                .addAsResource("printable.properties")
+                .addAsResource("infinispan.xml")
+                .addAsResource("jgroupsConfig.xml")
                 
                 // manually copied from Web module, modified
-                .addAsWebInfResource("web.xml", "web.xml") // only contains MockSeamListener definition
-                .addAsWebInfResource("components.xml", "components.xml") // corrected ejb component jndi-name references from java:app/jboss-seam to java:app/seam-blog
+                .addAsWebInfResource("web.xml") // only contains MockSeamListener definition
+                .addAsWebInfResource("components.xml") // corrected ejb component jndi-name references from java:app/jboss-seam to java:app/seam-blog
 
                 // manually copied from EAR module
-                .addAsWebInfResource("jboss-deployment-structure.xml", "jboss-deployment-structure.xml")
+                .addAsWebInfResource("jboss-deployment-structure.xml")
                 .addAsLibraries(libs);
 
         return war;

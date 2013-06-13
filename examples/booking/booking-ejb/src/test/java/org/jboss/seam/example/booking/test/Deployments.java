@@ -19,12 +19,12 @@ public class Deployments {
         return ShrinkWrap.create(WebArchive.class, "seam-booking.war")
                 .addPackage(Booking.class.getPackage())
                 .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml")
-                .addAsWebInfResource("import.sql", "classes/import.sql")
-                .addAsWebInfResource("persistence.xml", "classes/META-INF/persistence.xml")
-                .addAsWebInfResource("components.xml", "components.xml")
-                .addAsWebInfResource("jboss-deployment-structure.xml", "jboss-deployment-structure.xml")
-                .addAsWebInfResource("seam.properties", "classes/seam.properties")
-                .addAsWebInfResource("web.xml", "web.xml")
+                .addAsResource("import.sql")
+                .addAsResource("persistence.xml", "META-INF/persistence.xml")
+                .addAsWebInfResource("components.xml")
+                .addAsWebInfResource("jboss-deployment-structure.xml")
+                .addAsResource("seam.properties")
+                .addAsWebInfResource("web.xml")
                 .addAsLibraries(libs);
     }
 }

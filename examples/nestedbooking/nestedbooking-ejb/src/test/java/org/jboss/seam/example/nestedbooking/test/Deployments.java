@@ -21,16 +21,16 @@ public class Deployments {
                 
                 // from main and test resources
                 .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml")
-                .addAsResource("import.sql", "import.sql")
-                .addAsResource("seam.properties", "seam.properties")
-                .addAsWebInfResource("web.xml", "web.xml")
+                .addAsResource("import.sql")
+                .addAsResource("seam.properties")
+                .addAsWebInfResource("web.xml")
                 
                 // manually copied from EAR, persistence modified
                 .addAsResource("persistence.xml", "META-INF/persistence.xml")
-                .addAsWebInfResource("jboss-deployment-structure.xml", "jboss-deployment-structure.xml")
+                .addAsWebInfResource("jboss-deployment-structure.xml")
                 
                 // manually copied from WAR
-                .addAsWebInfResource("components.xml", "components.xml")
+                .addAsWebInfResource("components.xml")
                 .addAsLibraries(libs);
     }
 }

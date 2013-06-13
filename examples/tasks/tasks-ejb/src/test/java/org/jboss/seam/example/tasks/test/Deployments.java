@@ -19,22 +19,22 @@ public class Deployments {
                 .addPackages(true, "org.jboss.seam.example.tasks")
 
                 // already in EJB module
-                .addAsResource("import.sql", "import.sql")
-                .addAsResource("seam.properties", "seam.properties")
+                .addAsResource("import.sql")
+                .addAsResource("seam.properties")
                 .addAsWebInfResource("META-INF/ejb-jar.xml", "ejb-jar.xml")
 
                 // test-specific persistence.xml
                 .addAsResource("persistence.xml", "META-INF/persistence.xml")
 
                 // manually copied from Web module
-                .addAsWebInfResource("pages.xml", "pages.xml")
+                .addAsWebInfResource("pages.xml")
 
                 // manually copied from Web module, modified
-                .addAsWebInfResource("web.xml", "web.xml") // only contains MockSeamListener definition
-                .addAsWebInfResource("components.xml", "components.xml") // corrected ejb component jndi-name references from java:app/jboss-seam to java:app/seam-tasks
+                .addAsWebInfResource("web.xml") // only contains MockSeamListener definition
+                .addAsWebInfResource("components.xml") // corrected ejb component jndi-name references from java:app/jboss-seam to java:app/seam-tasks
 
                 // manually copied from EAR module
-                .addAsWebInfResource("jboss-deployment-structure.xml", "jboss-deployment-structure.xml")
+                .addAsWebInfResource("jboss-deployment-structure.xml")
                 .addAsLibraries(libs);
 
       return war;

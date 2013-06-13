@@ -15,7 +15,6 @@ public class Deployments {
                 .resolve().withTransitivity().asFile();
 
         // Get File reference to src/main/webapp/WEB-INF, to avoid duplication of resources for the test archive
-        // Depends on shrinkwrap-resolver-maven-plugin to set the property
         File webInf = new File(new File("pom.xml").getParentFile(), "src/main/webapp/WEB-INF");
 
         return ShrinkWrap.create(WebArchive.class, "hibernate-web.war")

@@ -10,13 +10,13 @@ To deploy the example to a running JBoss AS instance, follow these steps:
 
 1. In the example root directory run:
 
-    mvn clean install
+        mvn clean install
 
 2. Set JBOSS_HOME environment property.
 
 3. In the seampay-ear directory run:
 
-    mvn jboss-as:deploy
+        mvn jboss-as:deploy
 
 4. Open this URL in a web browser: http://localhost:8080/seam-seampay
 

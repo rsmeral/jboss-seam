@@ -25,9 +25,9 @@ These are general instructions for deploying Seam examples. Take a look at the
 
 3. Build the example by running the following command from the Seam `examples/${example.name}` directory:
    
-        mvn clean install   
+        mvn clean install
 
-   _NOTE: This command will also run unit tests on that example. To skip the tests add `-Dmaven.test.skip=true` to the maven call. Secondly, there is an option to create an "exploded" archive. For this purpose, use `-Pexploded` maven profile._
+   _NOTE: There is an option to create an "exploded" archive. For this purpose, use `-Pexploded` maven profile._
 
 4. Deploy the example by setting the `JBOSS_HOME` property and running the 
    following command from the Seam "examples/${example.name}/{example.name}-ear" directory:

@@ -30,7 +30,6 @@ public class ContactlistFunctionalTestBase extends SeamGrapheneTest {
 
     @Deployment(testable = false)
     public static Archive<?> createDeployment() {
-
        return DeploymentResolver.createDeployment();
     }
 

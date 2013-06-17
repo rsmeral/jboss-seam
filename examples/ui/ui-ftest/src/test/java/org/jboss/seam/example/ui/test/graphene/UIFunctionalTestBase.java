@@ -92,10 +92,7 @@ public class UIFunctionalTestBase extends SeamGrapheneTest {
 
     @Deployment(testable = false)
     public static EnterpriseArchive createDeployment() {
-        String examplesHome = System.getProperty("seam.examples.home");
-        return ShrinkWrap.create(ZipImporter.class, "seam-ui.ear")
-                .importFrom(new File(examplesHome + "/ui/ui-ear/target/seam-ui.ear"))
-                .as(EnterpriseArchive.class);
+        return DeploymentResolver.createDeployment();
     }
 
     @Before

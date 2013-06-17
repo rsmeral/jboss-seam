@@ -20,10 +20,7 @@ public class ExcelFunctionalTest extends SeamGrapheneTest {
 
     @Deployment(testable = false)
     public static EnterpriseArchive createDeployment() {
-        String examplesHome = System.getProperty("seam.examples.home");
-        return ShrinkWrap.create(ZipImporter.class, "seam-excel.ear")
-                .importFrom(new File(examplesHome + "/excel/excel-ear/target/seam-excel.ear"))
-                .as(EnterpriseArchive.class);
+        return DeploymentResolver.createDeployment();
     }
 
     /**

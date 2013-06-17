@@ -39,10 +39,7 @@ public abstract class SeamSpaceFunctionalTestBase extends SeamGrapheneTest {
 
     @Deployment(testable = false)
     public static EnterpriseArchive createDeployment() {
-        String examplesHome = System.getProperty("seam.examples.home");
-        return ShrinkWrap.create(ZipImporter.class, "seam-seamspace.ear")
-                .importFrom(new File(examplesHome + "/seamspace/seamspace-ear/target/seam-seamspace.ear"))
-                .as(EnterpriseArchive.class);
+        return DeploymentResolver.createDeployment();
     }
 
     @Override

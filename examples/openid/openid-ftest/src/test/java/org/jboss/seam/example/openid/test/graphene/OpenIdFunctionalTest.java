@@ -46,10 +46,7 @@ public class OpenIdFunctionalTest extends SeamGrapheneTest {
 
     @Deployment(testable = false)
     public static EnterpriseArchive createDeployment() {
-        String examplesHome = System.getProperty("seam.examples.home");
-        return ShrinkWrap.create(ZipImporter.class, "seam-openid.ear")
-                .importFrom(new File(examplesHome + "/openid/openid-ear/target/seam-openid.ear"))
-                .as(EnterpriseArchive.class);
+        return DeploymentResolver.createDeployment();
     }
 
     /**

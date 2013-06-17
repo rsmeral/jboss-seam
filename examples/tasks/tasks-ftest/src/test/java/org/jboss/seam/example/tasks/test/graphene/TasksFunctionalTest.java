@@ -77,10 +77,7 @@ public class TasksFunctionalTest extends SeamGrapheneTest {
 
     @Deployment(testable = false)
     public static EnterpriseArchive createDeployment() {
-        String examplesHome = System.getProperty("seam.examples.home");
-        return ShrinkWrap.create(ZipImporter.class, "seam-tasks.ear")
-                .importFrom(new File(examplesHome + "/tasks/tasks-ear/target/seam-tasks.ear"))
-                .as(EnterpriseArchive.class);
+        return DeploymentResolver.createDeployment();
     }
 
     @Before

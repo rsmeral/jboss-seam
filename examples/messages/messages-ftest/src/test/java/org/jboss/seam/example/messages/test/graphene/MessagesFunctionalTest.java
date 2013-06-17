@@ -46,10 +46,7 @@ public class MessagesFunctionalTest extends SeamGrapheneTest {
 
     @Deployment(testable = false)
     public static EnterpriseArchive createDeployment() {
-        String examplesHome = System.getProperty("seam.examples.home");
-        return ShrinkWrap.create(ZipImporter.class, "seam-messages.ear")
-                .importFrom(new File(examplesHome + "/messages/messages-ear/target/seam-messages.ear"))
-                .as(EnterpriseArchive.class);
+        return DeploymentResolver.createDeployment();
     }
     private Object[][] messages = {
         {0, "Greetings Earthling", "This is another example of a message."},

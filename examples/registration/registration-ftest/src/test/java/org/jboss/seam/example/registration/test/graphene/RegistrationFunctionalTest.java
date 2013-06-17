@@ -47,10 +47,7 @@ public class RegistrationFunctionalTest extends SeamGrapheneTest {
 
     @Deployment(testable = false)
     public static EnterpriseArchive createDeployment() {
-        String examplesHome = System.getProperty("seam.examples.home");
-        return ShrinkWrap.create(ZipImporter.class, "seam-registration.ear")
-                .importFrom(new File(examplesHome + "/registration/registration-ear/target/seam-registration.ear"))
-                .as(EnterpriseArchive.class);
+        return DeploymentResolver.createDeployment();
     }
 
     @Override

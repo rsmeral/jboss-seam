@@ -39,10 +39,7 @@ public class SeamBayFunctionalTestBase extends SeamGrapheneTest {
 
     @Deployment(testable = false)
     public static EnterpriseArchive createDeployment() {
-        String examplesHome = System.getProperty("seam.examples.home");
-        return ShrinkWrap.create(ZipImporter.class, "seam-seambay.ear")
-                .importFrom(new File(examplesHome + "/seambay/seambay-ear/target/seam-seambay.ear"))
-                .as(EnterpriseArchive.class);
+        return DeploymentResolver.createDeployment();
     }
     protected String defaultLogin = "demo";
     protected String defaultPassword = "demo";

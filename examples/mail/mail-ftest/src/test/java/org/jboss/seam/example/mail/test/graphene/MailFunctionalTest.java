@@ -23,10 +23,7 @@ public class MailFunctionalTest extends SeamGrapheneTest {
 
     @Deployment(testable = false)
     public static EnterpriseArchive createDeployment() {
-        String examplesHome = System.getProperty("seam.examples.home");
-        return ShrinkWrap.create(ZipImporter.class, "seam-mail.ear")
-                .importFrom(new File(examplesHome + "/mail/mail-ear/target/seam-mail.ear"))
-                .as(EnterpriseArchive.class);
+        return DeploymentResolver.createDeployment();
     }
     protected Wiser wiser;
     private Object[][] sendMethods = new Object[][]{

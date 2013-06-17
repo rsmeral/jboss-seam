@@ -56,10 +56,7 @@ public class ChatroomFunctionalTest extends SeamGrapheneTest {
 
     @Deployment(testable = false)
     public static EnterpriseArchive createDeployment() {
-        String examplesHome = System.getProperty("seam.examples.home");
-        return ShrinkWrap.create(ZipImporter.class, "seam-chatroom.ear")
-                .importFrom(new File(examplesHome + "/remoting/chatroom/chatroom-ear/target/seam-chatroom.ear"))
-                .as(EnterpriseArchive.class);
+        return DeploymentResolver.createDeployment();
     }
 
     @Before

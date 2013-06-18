@@ -75,7 +75,7 @@
 
     <profiles>
         <profile>
-            <id>arq-remote</id>
+            <id>arq-jbossas-7-remote</id>
             <activation>
                 <property>
                     <name>remote</name>
@@ -90,7 +90,7 @@
             </dependencies>
         </profile>
         <profile>
-            <id>arq-managed</id>
+            <id>arq-jbossas-7-managed</id>
             <activation>
                 <property>
                     <name>!remote</name>

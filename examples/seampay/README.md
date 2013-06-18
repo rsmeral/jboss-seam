@@ -81,5 +81,5 @@ Testing in JBDS
 1. Open JBDS and start a configured instance of JBoss AS
 2. Import the `ftest` project of the example
 3. In the _Project Explorer_, select the ftest project, then
-    1. Type `Ctrl+Alt+P` (_Select Maven Profiles_) and activate `arq-remote` profile and deactivate `arq-managed` profile
+    1. Type `Ctrl+Alt+P` (_Select Maven Profiles_) and activate `arq-jbossas-7-remote` profile and deactivate `arq-jbossas-7-managed` profile
     2. Right-click the module and select _Run As_ - _JUnit Test_

@@ -33,9 +33,7 @@ import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Properties;
 import org.jboss.arquillian.drone.api.annotation.Drone;
-import static org.jboss.arquillian.graphene.Graphene.element;
-import static org.jboss.arquillian.graphene.Graphene.guardHttp;
-import static org.jboss.arquillian.graphene.Graphene.guardXhr;
+import static org.jboss.arquillian.graphene.Graphene.*;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.junit.Before;
 import org.junit.Rule;
@@ -179,7 +177,7 @@ public abstract class SeamGrapheneTest {
     }
 
     public void clickAndWaitAjax(By by) {
-        guardXhr(browser.findElement(by)).click();
+        guardAjax(browser.findElement(by)).click();
     }
 
     public void type(By by, CharSequence text, boolean clear) {
@@ -247,6 +245,7 @@ public abstract class SeamGrapheneTest {
     }
 
     public boolean isRealBrowser() {
-        return browser instanceof RemoteWebDriver;
+        String webDriverClass = browser.getClass().toString().toLowerCase();
+        return !webDriverClass.contains("phantom") && !webDriverClass.contains("htmlunit");
     }
 }

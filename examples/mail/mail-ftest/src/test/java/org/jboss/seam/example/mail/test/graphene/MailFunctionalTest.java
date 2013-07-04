@@ -1,13 +1,12 @@
 package org.jboss.seam.example.mail.test.graphene;
 
-import java.io.File;
+import java.nio.charset.Charset;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.seam.example.common.test.DeploymentResolver;
 import org.jboss.seam.example.common.test.SeamGrapheneTest;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.importer.ZipImporter;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.shrinkwrap.api.Archive;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -22,17 +21,19 @@ import org.subethamail.wiser.WiserMessage;
 public class MailFunctionalTest extends SeamGrapheneTest {
 
     @Deployment(testable = false)
-    public static EnterpriseArchive createDeployment() {
+    public static Archive<?> createDeployment() {
         return DeploymentResolver.createDeployment();
     }
+
     protected Wiser wiser;
+
     private Object[][] sendMethods = new Object[][]{
-        {getBy("SEND_SIMPLE_BUTTON"), new String[]{"Content-Type: text/html; charset=ISO-8859-1", "Content-Disposition: inline", "<p>Dear " + getProperty("FIRSTNAME") + ",</p>"}},
+        {getBy("SEND_SIMPLE_BUTTON"), new String[]{"Content-Type: text/html; charset=" + Charset.defaultCharset().name(), "Content-Disposition: inline", "<p>Dear " + getProperty("FIRSTNAME") + ",</p>"}},
         {getBy("SEND_PLAIN_BUTTON"), new String[]{"This is a plain text, email."}},
-        {getBy("SEND_HTML_BUTTON"), new String[]{"Subject: Seam Mail", "Content-Type: multipart/mixed;", "Content-Type: multipart/alternative;", "Content-Type: text/plain; charset=ISO-8859-1", "This is the alternative text body for mail readers that don't support html", "Content-Type: text/html; charset=ISO-8859-1", "<p>This is an example <i>HTML</i> email sent by Seam.</p>"}},
+        {getBy("SEND_HTML_BUTTON"), new String[]{"Subject: Seam Mail", "Content-Type: multipart/mixed;", "Content-Type: multipart/alternative;", "Content-Type: text/plain; charset=" + Charset.defaultCharset().name(), "This is the alternative text body for mail readers that don't support html", "Content-Type: text/html; charset=" + Charset.defaultCharset().name(), "<p>This is an example <i>HTML</i> email sent by Seam.</p>"}},
         {getBy("SEND_ATTACHMENT_BUTTON"), new String[]{"Content-Type: multipart/mixed;", "Content-Type: application/octet-stream; name=jboss.jpg", "/9j/4AAQSkZJRgABA"/*jpeg start*/, "Content-Type: application/octet-stream; name=numbers.csv", "3,Three,treis,trois", "Content-Type: image/png; name=" + getProperty("FIRSTNAME") + "_" + getProperty("LASTNAME") + ".jpg", "iVBORw0KGgo" /*png start*/}},
-        {getBy("SEND_ASYNCHRONOUS_BUTTON"), new String[]{"Content-Type: multipart/mixed;", "Content-Type: text/html; charset=ISO-8859-1", "Content-Disposition: inline", "<p>Dear " + getProperty("FIRSTNAME") + ",</p>"}},
-        {getBy("SEND_TEMPLATE_BUTTON"), new String[]{"Subject: Templating with Seam Mail", "Content-Type: multipart/mixed;", "Content-Type: multipart/alternative;", "Content-Type: text/plain; charset=ISO-8859-1", "Sorry, your mail reader doesn't support html.", "Content-Type: text/html; charset=ISO-8859-1", "<p>Here's a dataTable</p><table>", "<td>Saturday</td>"}},
+        {getBy("SEND_ASYNCHRONOUS_BUTTON"), new String[]{"Content-Type: multipart/mixed;", "Content-Type: text/html; charset=" + Charset.defaultCharset().name(), "Content-Disposition: inline", "<p>Dear " + getProperty("FIRSTNAME") + ",</p>"}},
+        {getBy("SEND_TEMPLATE_BUTTON"), new String[]{"Subject: Templating with Seam Mail", "Content-Type: multipart/mixed;", "Content-Type: multipart/alternative;", "Content-Type: text/plain; charset=" + Charset.defaultCharset().name(), "Sorry, your mail reader doesn't support html.", "Content-Type: text/html; charset=" + Charset.defaultCharset().name(), "<p>Here's a dataTable</p><table>", "<td>Saturday</td>"}},
         {getBy("SEND_SERVLET_BUTTON"), new String[]{"Content-Type: multipart/mixed;", "Content-Disposition: inline", "Dear John Smith,", "This is a plain text, email."}}
     };
 
@@ -94,7 +95,17 @@ public class MailFunctionalTest extends SeamGrapheneTest {
 
     @Test
     public void testAsync() {
-        mailTest(sendMethods[4]);
+        Object[] sendMethod = sendMethods[4];
+        By buttonToClick = (By) sendMethod[0];
+        String[] expectedMessageContents = (String[]) sendMethod[1];
+        fillInInputs();
+        sendEmail(buttonToClick);
+        // the async delay in MailExample.sendAsynchronous is 3000 ms, add 2000 ms as a buffer
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+        }
+        checkDelivered(expectedMessageContents);
     }
 
     @Test

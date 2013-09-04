@@ -54,7 +54,7 @@ Functional tests are located in a separate project and are not executed during t
 * __Arquillian Graphene Extension__ - an advanced Ajax-capable type-safe Selenium-based browser testing tool,
 * __Arquillian Drone Extension__ - to automatically run and stop browser instances.
 
-_Note: It is necessary to first build and install the example, because the functional test resolves the test artifact from the local Maven repository._
+_Note: It is necessary to first build and package the example, because the functional test references the built archive for automatic deployment to the server._
 
 Run the functional test on JBoss AS instance with
     
@@ -62,9 +62,19 @@ Run the functional test on JBoss AS instance with
 
 The `JBOSS_HOME` environment variable must be set and point to a JBoss AS instance directory.
 
-To test on a running server, use
+Several variables can be configured:
 
-    mvn -f contactlist-ftest/pom.xml clean test -Dremote
+* path to an alternative archive for testing
+
+        -DtestDeployment=/path/to/archive.ear
+
+* the browser to use for testing
+
+        -DbrowserCapabilities=htmlUnit
+
+* test on a running server
+
+        -Dremote
 
 Testing in JBDS
 ---------------

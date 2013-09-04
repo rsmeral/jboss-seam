@@ -79,6 +79,10 @@ The following steps describe executing of functional tests in general. Some exam
 * Start JBoss AS 7
 * Set `JBOSS_HOME` environment property, respectively
 
-To run functional tests:
+To run a functional test:
 
     mvn clean test -f ${example.name}/${example.name}-ftest/pom.xml
+
+To run all functional tests:
+
+    mvn clean test -Dftest

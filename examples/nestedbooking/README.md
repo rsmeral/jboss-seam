@@ -26,7 +26,7 @@ To deploy the example to a running JBoss AS instance, follow these steps:
 Testing the example
 -------------------
 
-This example is covered by integration tests. All tests use the following technologies:
+This example is covered by integration and functional tests. All tests use the following technologies:
 
 * __Arquillian__ -  as the framework for EE testing, for managing of container lifecycle and deployment of test archive,
 * __ShrinkWrap__ - to create the test archive (WAR).
@@ -49,6 +49,35 @@ To test on a running server, use
 
     mvn clean test -Darquillian=jbossas-remote-7
 
+### Functional tests
+
+Functional tests are located in a separate project and are not executed during the build of the example. They test the built archive in an application server through browser-testing. They use:
+
+* __Arquillian Graphene Extension__ - an advanced Ajax-capable type-safe Selenium-based browser testing tool,
+* __Arquillian Drone Extension__ - to automatically run and stop browser instances.
+
+_Note: It is necessary to first build and package the example, because the functional test references the built archive for automatic deployment to the server._
+
+Run the functional test on JBoss AS instance with
+    
+    mvn -f blog-ftest/pom.xml clean test
+
+The `JBOSS_HOME` environment variable must be set and point to a JBoss AS instance directory.
+
+Several variables can be configured:
+
+* path to an alternative archive for testing
+
+        -DtestDeployment=/path/to/archive.ear
+
+* the browser to use for testing
+
+        -DbrowserCapabilities=htmlUnit
+
+* test on a running server
+
+        -Dremote
+
 Testing in JBDS
 ---------------
 ### Integration tests
@@ -60,3 +89,7 @@ Testing in JBDS
 3. In the _Project Explorer_, select the EJB module project, then
     1. Type `Ctrl+Alt+P` (_Select Maven Profiles_) and check `integration-tests` and `arq-jbossas-7-remote`
     2. Right-click the module and select _Run As_ - _JUnit Test_
+
+### Functional tests
+
+It is not possible to run the functional tests of this example in JBDS, because they use the maven-dependency-plugin to copy test classes from a different maven artifact, which is not a configuration supported by JBDS.

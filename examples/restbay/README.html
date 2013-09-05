@@ -10,16 +10,15 @@ It runs an EAR.</p>
 <ol>
 <li><p>In the example root directory run:</p>
 
-<pre><code> mvn clean install
+<pre><code>mvn clean install
 </code></pre></li>
 <li><p>Set JBOSS_HOME environment property.</p></li>
 <li><p>In the restbay-ear directory run:</p>
 
-<pre><code> mvn jboss-as:deploy
+<pre><code>mvn jboss-as:deploy
 </code></pre></li>
 <li><p>Open this URL in a web browser: http://localhost:8080/seam-restbay</p></li>
 </ol>
-
 
 <h2>Testing the example</h2>
 
@@ -30,7 +29,6 @@ It runs an EAR.</p>
 <li><strong>ShrinkWrap</strong> - to create the test archive (WAR).</li>
 </ul>
 
-
 <h3>Integration tests</h3>
 
 <p>Integration tests cover core application logic and reside in the EJB module. In addition to Arquillian and ShrinkWrap, the integration tests also use:</p>
@@ -40,8 +38,7 @@ It runs an EAR.</p>
 <li><strong>ShrinkWrap Resolver</strong> - to resolve dependencies of the project for packaging in the test archive.</li>
 </ul>
 
-
-<p>The tests are executed in Maven&rsquo;s test phase. By default they are skipped and can be executed on JBoss AS with:</p>
+<p>The tests are executed in Maven's test phase. By default they are skipped and can be executed on JBoss AS with:</p>
 
 <pre><code>mvn clean test -Darquillian=jbossas-managed-7
 </code></pre>
@@ -61,11 +58,8 @@ It runs an EAR.</p>
 <li>Open JBDS and start a configured instance of JBoss AS</li>
 <li>Import the example project and its submodules</li>
 <li>In the <em>Project Explorer</em>, select the EJB module project, then
-
 <ol>
 <li>Type <code>Ctrl+Alt+P</code> (<em>Select Maven Profiles</em>) and check <code>integration-tests</code> and <code>arq-jbossas-7-remote</code></li>
 <li>Right-click the module and select <em>Run As</em> - <em>JUnit Test</em></li>
+</ol></li>
 </ol>
-</li>
-</ol>
-

@@ -9,16 +9,15 @@
 <ol>
 <li><p>In the example root directory run:</p>
 
-<pre><code> mvn clean install
+<pre><code>mvn clean install
 </code></pre></li>
 <li><p>Set JBOSS_HOME environment property.</p></li>
 <li><p>In the jpa-web directory run:</p>
 
-<pre><code> mvn jboss-as:deploy
+<pre><code>mvn jboss-as:deploy
 </code></pre></li>
 <li><p>Open this URL in a web browser: http://localhost:8080/jpa-web</p></li>
 </ol>
-
 
 <h2>Testing the example</h2>
 
@@ -29,7 +28,6 @@
 <li><strong>ShrinkWrap</strong> - to create the test archive (WAR).</li>
 </ul>
 
-
 <h3>Integration tests</h3>
 
 <p>Integration tests cover core application logic and reside in the EJB module. In addition to Arquillian and ShrinkWrap, the integration tests also use:</p>
@@ -39,8 +37,7 @@
 <li><strong>ShrinkWrap Resolver</strong> - to resolve dependencies of the project for packaging in the test archive.</li>
 </ul>
 
-
-<p>The tests are executed in Maven&rsquo;s test phase. By default they are skipped and can be executed on JBoss AS with:</p>
+<p>The tests are executed in Maven's test phase. By default they are skipped and can be executed on JBoss AS with:</p>
 
 <pre><code>mvn clean test -Darquillian=jbossas-managed-7
 </code></pre>
@@ -61,8 +58,7 @@
 <li><strong>Arquillian Drone Extension</strong> - to automatically run and stop browser instances.</li>
 </ul>
 
-
-<p><em>Note: It is necessary to first build and install the example, because the functional test resolves the test artifact from the local Maven repository.</em></p>
+<p><em>Note: It is necessary to first build and package the example, because the functional test references the built archive for automatic deployment to the server.</em></p>
 
 <p>Run the functional test on JBoss AS instance with</p>
 
@@ -71,10 +67,22 @@
 
 <p>The <code>JBOSS_HOME</code> environment variable must be set and point to a JBoss AS instance directory.</p>
 
-<p>To test on a running server, use</p>
+<p>Several variables can be configured:</p>
 
-<pre><code>mvn -f jpa-ftest/pom.xml clean test -Dremote
-</code></pre>
+<ul>
+<li><p>path to an alternative archive for testing</p>
+
+<pre><code>-DtestDeployment=/path/to/archive.ear
+</code></pre></li>
+<li><p>the browser to use for testing</p>
+
+<pre><code>-DbrowserCapabilities=htmlUnit
+</code></pre></li>
+<li><p>test on a running server</p>
+
+<pre><code>-Dremote
+</code></pre></li>
+</ul>
 
 <h2>Testing in JBDS</h2>
 
@@ -84,14 +92,11 @@
 <li>Open JBDS and start a configured instance of JBoss AS</li>
 <li>Import the example project and its submodules</li>
 <li>In the <em>Project Explorer</em>, select the Web module project, then
-
 <ol>
 <li>Type <code>Ctrl+Alt+P</code> (<em>Select Maven Profiles</em>) and check <code>integration-tests</code> and <code>arq-jbossas-7-remote</code></li>
 <li>Right-click the module and select <em>Run As</em> - <em>JUnit Test</em></li>
+</ol></li>
 </ol>
-</li>
-</ol>
-
 
 <h3>Functional tests</h3>
 

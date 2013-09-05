@@ -21,21 +21,25 @@
  */
 package org.jboss.seam.example.remoting.chatroom.test.graphene;
 
+import com.google.common.base.Predicate;
 import java.net.MalformedURLException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import static org.jboss.arquillian.graphene.Graphene.*;
-import org.jboss.arquillian.graphene.wait.WebDriverWait;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.seam.example.common.test.DeploymentResolver;
 import org.jboss.seam.example.common.test.SeamGrapheneTest;
+import static org.jboss.seam.example.common.test.SeamGrapheneTest.getProperty;
 import org.jboss.shrinkwrap.api.Archive;
+import org.junit.After;
 import static org.junit.Assert.*;
-import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * This class tests functionality of remoting/chatroom example. The test opens
@@ -48,20 +52,31 @@ import org.openqa.selenium.Keys;
 @RunWith(Arquillian.class)
 public class ChatroomFunctionalTest extends SeamGrapheneTest {
 
-    public static long timeout = 22000;
-    private static String FIRST = "0";
-    private static String SECOND = "1";
+    public static long timeout = 2000;
 
     @Deployment(testable = false)
     public static Archive<?> createDeployment() {
         return DeploymentResolver.createDeployment();
     }
 
+    private WebDriver driver;
+
+    private WebDriver driver2;
+    
     @Before
     @Override
     public void beforeTest() throws MalformedURLException {
-        Assume.assumeTrue(isRealBrowser());// need window handling
-        super.beforeTest();
+        driver = new FirefoxDriver();
+        driver2 = new FirefoxDriver();
+        
+        driver.navigate().to(contextPath + getProperty("HOME_PAGE"));
+        driver2.navigate().to(contextPath + getProperty("HOME_PAGE"));
+    }
+    
+    @After
+    public void afterTest() throws MalformedURLException {
+        driver.quit();
+        driver2.quit();
     }
     
 //    Graphene-WebDriver can't do multiple browsers ARQGRA-72
@@ -70,13 +85,11 @@ public class ChatroomFunctionalTest extends SeamGrapheneTest {
 //    protected WebDriver browser2;
     @Test // place holder - should be replaced by better tests as soon as JBSEAM-3944 is resolved
     public void homePageLoadTest() {
-        assertEquals("Unexpected page title.", getProperty("HOME_PAGE_TITLE"), browser.getTitle());
+        assertEquals("Unexpected page title.", getProperty("HOME_PAGE_TITLE"), driver.getTitle());
     }
 
     @Test
     public void connectAndChatTest() {
-        openWindow(contextPath + getProperty("HOME_PAGE"), FIRST);
-        openWindow(contextPath + getProperty("HOME_PAGE"), SECOND);
 
         /*connect user to chat*/
         connect();
@@ -91,80 +104,92 @@ public class ChatroomFunctionalTest extends SeamGrapheneTest {
     }
 
     public void connect() {
-        selectWindow(FIRST, false);
-        type(getBy("NAME_INPUT"), getProperty("NAME1"));
-        clickAndWaitAjax(getBy("CONNECT_BUTTON"));
+        driver.findElement(getBy("NAME_INPUT")).sendKeys(getProperty("NAME1"));
+        driver.findElement(getBy("CONNECT_BUTTON")).click();
     }
 
     public void verifyConnecting() {
-        selectWindow(FIRST, false);
-        waitForElement("MARTIN_LISTED");
-
-        selectWindow(SECOND, false);
-        type(getBy("NAME_INPUT"), getProperty("NAME2"));
-        clickAndWaitAjax(getBy("CONNECT_BUTTON"));
-        waitForElement("JOZEF_LISTED");
-        waitForElement("MARTIN_LISTED");
-
-        selectWindow(FIRST, false);
-        waitForText("CHAT_WINDOW", "JOZEF_CONNECTED");
-        waitForElement("JOZEF_LISTED");
+        waitForElement(driver, "MARTIN_LISTED");
+        
+        driver2.findElement(getBy("NAME_INPUT")).sendKeys(getProperty("NAME2"));
+        driver2.findElement(getBy("CONNECT_BUTTON")).click();
+        waitForElement(driver2, "JOZEF_LISTED");
+        waitForElement(driver2, "MARTIN_LISTED");
+        
+        waitForText(driver, "CHAT_WINDOW", "JOZEF_CONNECTED");
+        waitForElement(driver, "JOZEF_LISTED");
     }
 
     public void disconnect() {
-        selectWindow(SECOND, false);
-        clickAndWaitAjax(getBy("DISCONNECT_BUTTON"));
+        driver2.findElement(getBy("DISCONNECT_BUTTON")).click();
     }
 
     public void verifyDisconnecting() {
-        selectWindow(SECOND, false);
-        waitForElementNotPresent("JOZEF_LISTED");
-        waitForElement("DISCONNECT_BUTTON_DISABLED");
+        waitForElementNotPresent(driver2, "JOZEF_LISTED");
+        waitForElement(driver2, "DISCONNECT_BUTTON_DISABLED");
 
-        selectWindow(FIRST, false);
-        waitForText("CHAT_WINDOW", "JOZEF_DISCONNECTED");
-        waitForElementNotPresent("JOZEF_LISTED");
-        clickAndWaitAjax(getBy("DISCONNECT_BUTTON"));
-        waitForElementNotPresent("MARTIN_LISTED");
-        waitForElement("DISCONNECT_BUTTON_DISABLED");
+        waitForText(driver, "CHAT_WINDOW", "JOZEF_DISCONNECTED");
+        waitForElementNotPresent(driver, "JOZEF_LISTED");
+        driver.findElement(getBy("DISCONNECT_BUTTON")).click();
+        waitForElementNotPresent(driver,"MARTIN_LISTED");
+        waitForElement(driver, "DISCONNECT_BUTTON_DISABLED");
     }
 
     public void chat() {
         /*first user is sending a message*/
-        selectWindow(FIRST, false);
-        type(getBy("MESSAGE_INPUT"), getProperty("MESSAGE_FROM_MARTIN"));
-        type(getBy("MESSAGE_INPUT"), Keys.RETURN, false);
-        waitForText("CHAT_WINDOW", "MARTIN_GT");
-        waitForText("CHAT_WINDOW", "MESSAGE_FROM_MARTIN");
+        driver.findElement(getBy("MESSAGE_INPUT")).sendKeys(getProperty("MESSAGE_FROM_MARTIN"));
+        driver.findElement(getBy("MESSAGE_INPUT")).sendKeys(Keys.RETURN);
+        waitForText(driver, "CHAT_WINDOW", "MARTIN_GT");
+        waitForText(driver, "CHAT_WINDOW", "MESSAGE_FROM_MARTIN");
 
-        selectWindow(SECOND, false);
-        waitForText("CHAT_WINDOW", "MARTIN_GT");
-        waitForText("CHAT_WINDOW", "MESSAGE_FROM_MARTIN");
+        waitForText(driver2, "CHAT_WINDOW", "MARTIN_GT");
+        waitForText(driver2, "CHAT_WINDOW", "MESSAGE_FROM_MARTIN");
 
         /*second user is sending a message*/
-        type(getBy("MESSAGE_INPUT"), getProperty("MESSAGE_FROM_JOZEF"));
-        type(getBy("MESSAGE_INPUT"), Keys.RETURN, false);
-        waitForText("CHAT_WINDOW", "JOZEF_GT");
-        waitForText("CHAT_WINDOW", "MESSAGE_FROM_JOZEF");
+        driver2.findElement(getBy("MESSAGE_INPUT")).sendKeys(getProperty("MESSAGE_FROM_JOZEF"));
+        driver2.findElement(getBy("MESSAGE_INPUT")).sendKeys(Keys.RETURN);
+        waitForText(driver2, "CHAT_WINDOW", "JOZEF_GT");
+        waitForText(driver2, "CHAT_WINDOW", "MESSAGE_FROM_JOZEF");
 
-        selectWindow(FIRST, false);
-        waitForText("CHAT_WINDOW", "JOZEF_GT");
-        waitForText("CHAT_WINDOW", "MESSAGE_FROM_JOZEF");
+        waitForText(driver, "CHAT_WINDOW", "JOZEF_GT");
+        waitForText(driver, "CHAT_WINDOW", "MESSAGE_FROM_JOZEF");
     }
 
-    private WebDriverWait waitCustom() {
-        return new WebDriverWait(null, browser, timeout);
+    private void waitForElement(WebDriver browser, final String propertyName, final Object... args) {
+        new WebDriverWait(browser, timeout).until(new Predicate<WebDriver>() {
+
+            @Override
+            public boolean apply(WebDriver input) {
+                return input.findElement(getBy(propertyName, args)).isDisplayed();
+            }
+            
+        });
     }
 
-    private void waitForElement(String propertyName, Object... args) {
-        waitCustom().until().element(getBy(propertyName, args)).is().present();
+    private void waitForText(WebDriver browser, final String elementPropertyName, final String textPropertyName, final Object... args) {
+         new WebDriverWait(browser, timeout).until(new Predicate<WebDriver>() {
+
+            @Override
+            public boolean apply(WebDriver input) {
+                return input.findElement(getBy(elementPropertyName, args)).getText().contains(getProperty(textPropertyName));
+            }
+            
+        });
     }
 
-    private void waitForText(String elementPropertyName, String textPropertyName, Object... args) {
-        waitCustom().until().element(getBy(elementPropertyName, args)).text().contains(getProperty(textPropertyName));
-    }
+    private void waitForElementNotPresent(WebDriver browser, final String propertyName, final Object... args) {
+        new WebDriverWait(browser, timeout).until(new Predicate<WebDriver>() {
 
-    private void waitForElementNotPresent(String propertyName, Object... args) {
-        waitCustom().until(element(getBy(propertyName, args)).not().isPresent());
+            @Override
+            public boolean apply(WebDriver input) {
+                try {
+                    input.findElement(getBy(propertyName, args));
+                    return false;
+                } catch(NotFoundException nfe) {
+                    return true;
+                }
+            }
+            
+        });
     }
 }

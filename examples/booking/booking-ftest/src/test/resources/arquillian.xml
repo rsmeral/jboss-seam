@@ -11,9 +11,7 @@
     <container qualifier="jboss7" default="true">
         <configuration>
             <!-- <property name="jbossHome"></property> -->
-            <property name="javaVmArguments">-Xms512m -Xmx512m -XX:MaxPermSize=512m -Djava.net.preferIPv4Stack=true</property>
-            <property name="outputToConsole">false</property>
-            <property name="startupTimeoutInSeconds">300</property>
+            
         </configuration>
     </container>
 

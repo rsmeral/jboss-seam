@@ -74,7 +74,7 @@
                         <webModule>
                             <groupId>org.jboss.seam.examples.booking</groupId>
                             <artifactId>booking-web</artifactId>
-                            <contextRoot>/seam-booking</contextRoot>
+                            <contextRoot>/</contextRoot>
                             <bundleFileName>booking-web.war</bundleFileName>
                         </webModule>
                         <ejbModule>

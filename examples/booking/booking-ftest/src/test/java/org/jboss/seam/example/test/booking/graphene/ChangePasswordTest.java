@@ -23,7 +23,6 @@ package org.jboss.seam.example.test.booking.graphene;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.seam.example.common.test.booking.graphene.BookingFunctionalTestBase;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;

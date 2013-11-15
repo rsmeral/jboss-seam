@@ -41,16 +41,7 @@ public class ChangePasswordTest extends BookingFunctionalTestBase {
 
     protected final static String LONG_TEXT = "testertestertest";
     protected final static String SHORT_TEXT = "tt";
-    // overriding default values
-    protected final String USERNAME = System.getProperty("appUser");
-    protected final String PASSWORD = "demo";
-
-    @Before
-    @Override
-    public void setUp() {
-        assertTrue("Login failed.", login(USERNAME, PASSWORD));
-    }
-
+    
     /**
      * Verifies that changing password works well. If clean-up part of this
      * method fails it may affect other methods.
@@ -60,12 +51,12 @@ public class ChangePasswordTest extends BookingFunctionalTestBase {
         changePassword("password");
         assertTrue("Password change failed.", isTextInSource(getProperty("PASSWORD_UPDATED_MESSAGE")));
         logout();
-        assertTrue("Login failed.", login(USERNAME, "password"));
+        assertTrue("Login failed.", login(DEFAULT_USERNAME, "password"));
         // cleanup - set default password
-        changePassword(PASSWORD);
+        changePassword(DEFAULT_PASSWORD);
         assertTrue("Password change failed.", isTextInSource(getProperty("PASSWORD_UPDATED_MESSAGE")));
         logout();
-        assertTrue("Login failed.", login(USERNAME, PASSWORD));
+        assertTrue("Login failed.", login(DEFAULT_USERNAME, DEFAULT_PASSWORD));
     }
 
     @Test

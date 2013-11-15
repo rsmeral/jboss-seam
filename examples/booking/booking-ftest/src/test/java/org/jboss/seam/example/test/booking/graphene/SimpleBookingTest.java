@@ -24,7 +24,6 @@ package org.jboss.seam.example.test.booking.graphene;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import static org.junit.Assert.*;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -42,14 +41,6 @@ public class SimpleBookingTest extends BookingFunctionalTestBase {
     protected final String EXPECTED_NAME = "Demo User";
     protected final String CREDIT_CARD = "0123456789012345";
     protected final String CREDIT_CARD_NAME = "visa";
-    protected final String USER = System.getProperty("appUser");
-
-    @Before
-    @Override
-    public void setUp() {
-        
-        assertTrue("Login failed.", login(USER, "demo"));
-    }
     
     /**
      * Tries searching for non existing hotel.

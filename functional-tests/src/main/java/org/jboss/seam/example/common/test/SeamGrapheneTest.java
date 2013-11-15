@@ -72,15 +72,24 @@ public abstract class SeamGrapheneTest {
                 bos = new BufferedOutputStream(new FileOutputStream(testOutput.getAbsolutePath() + "/" + method.getName() + ".png"));
                 bos.write(screenshot);
                 bos.close();
+            } catch (Exception ex) {
+                System.err.println("Can't take screenshot");
+            } finally {
+                try {
+                    bos.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
 
+            try {
                 bw = new BufferedWriter(new FileWriter(testOutput.getAbsolutePath() + "/" + method.getName() + ".html"));
                 bw.write(browser.getPageSource());
                 bw.close();
             } catch (Exception ex) {
-                ex.printStackTrace();
+                System.err.println("Can't save HTML");
             } finally {
                 try {
-                    bos.close();
                     bw.close();
                 } catch (Exception ex) {
                     ex.printStackTrace();

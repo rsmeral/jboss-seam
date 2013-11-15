@@ -39,7 +39,7 @@ import org.junit.Before;
 public class BookingFunctionalTestBase extends SeamGrapheneTest {
 
     protected final String DEFAULT_USERNAME = System.getProperty("appUser");
-    protected final String DEFAULT_PASSWORD = "demo";
+    protected final String DEFAULT_PASSWORD = "demodemo";
 
 //    @Deployment(testable = false)
 //    public static Archive<?> createDeployment() {
@@ -54,6 +54,7 @@ public class BookingFunctionalTestBase extends SeamGrapheneTest {
             contextPath = new URL(System.getProperty("appUrl"));
         } catch (MalformedURLException ex) {
         }
+        
         assertTrue("Login failed.", login());
     }
 

@@ -24,7 +24,6 @@ package org.jboss.seam.example.test.booking.graphene;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import static org.junit.Assert.*;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

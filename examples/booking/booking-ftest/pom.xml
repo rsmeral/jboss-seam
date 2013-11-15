@@ -16,6 +16,7 @@
         <version.org.jboss.arquillian.extension.drone>1.2.0.Alpha2</version.org.jboss.arquillian.extension.drone>
         <testDeployment>${basedir}/../booking-ear/target/seam-booking.ear</testDeployment>
         <browserCapabilities>firefox</browserCapabilities>
+        <appUrl>http://seamsoak-wfkqa.rhcloud.com/</appUrl>
     </properties>
    
     <dependencyManagement>

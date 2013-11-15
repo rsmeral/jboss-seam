@@ -21,30 +21,15 @@
  */
 package org.jboss.seam.example.common.test;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Properties;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import static org.jboss.arquillian.graphene.Graphene.*;
-import org.jboss.arquillian.test.api.ArquillianResource;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.rules.MethodRule;
-import org.junit.rules.TestWatchman;
-import org.junit.runners.model.FrameworkMethod;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -57,41 +42,6 @@ import org.openqa.selenium.support.ui.Select;
  *
  */
 public abstract class SeamGrapheneTest {
-
-    @Rule
-    public MethodRule watchman = new TestWatchman() {
-        @Override
-        public void failed(Throwable e, FrameworkMethod method) {
-            BufferedOutputStream bos = null;
-            BufferedWriter bw = null;
-            File testOutput = new File("target/test-output");
-            if (!testOutput.exists()) {
-                testOutput.mkdirs();
-            }
-            try {// HTMLUnit can't maximize a window or take a screenshot
-                browser.manage().window().maximize();
-                //WebDriver augmentedDriver = new Augmenter().augment(browser);
-                byte[] screenshot = ((TakesScreenshot) browser).getScreenshotAs(OutputType.BYTES);
-                //byte[] screenshot = ((TakesScreenshot) browser).getScreenshotAs(OutputType.BYTES);
-                bos = new BufferedOutputStream(new FileOutputStream(testOutput.getAbsolutePath() + "/" + method.getName() + ".png"));
-                bos.write(screenshot);
-                bos.close();
-
-                bw = new BufferedWriter(new FileWriter(testOutput.getAbsolutePath() + "/" + method.getName() + ".html"));
-                bw.write(browser.getPageSource());
-                bw.close();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            } finally {
-                try {
-                    bos.close();
-                    bw.close();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }
-    };
     
     private static String PROPERTY_FILE = "/ftest.properties";
     private static boolean propertiesLoaded = false;
@@ -100,14 +50,6 @@ public abstract class SeamGrapheneTest {
 
     @Drone
     public WebDriver browser;
-
-    @ArquillianResource
-    protected URL contextPath;
-
-    @Before
-    public void beforeTest() throws MalformedURLException {
-        open(contextPath.toString());
-    }
 
     public static String getProperty(String key, Object... args) {
         if (!propertiesLoaded) {

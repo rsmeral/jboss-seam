@@ -46,7 +46,7 @@ public class BookingFunctionalTestBase extends SeamGrapheneTest {
 //        return DeploymentResolver.createDeployment();
 //    }
     
-    public URL contextPath;
+    protected URL contextPath;
     
     @Before
     public void setUp() {

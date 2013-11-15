@@ -54,49 +54,49 @@ import org.openqa.selenium.support.ui.Select;
  */
 public abstract class SeamGrapheneTest {
 
-    @Rule
-    public MethodRule watchman = new TestWatchman() {
-        @Override
-        public void failed(Throwable e, FrameworkMethod method) {
-            BufferedOutputStream bos = null;
-            BufferedWriter bw = null;
-            File testOutput = new File("target/test-output");
-            if (!testOutput.exists()) {
-                testOutput.mkdirs();
-            }
-            try {// HTMLUnit can't maximize a window or take a screenshot
-                browser.manage().window().maximize();
-                //WebDriver augmentedDriver = new Augmenter().augment(browser);
-                byte[] screenshot = ((TakesScreenshot) browser).getScreenshotAs(OutputType.BYTES);
-                //byte[] screenshot = ((TakesScreenshot) browser).getScreenshotAs(OutputType.BYTES);
-                bos = new BufferedOutputStream(new FileOutputStream(testOutput.getAbsolutePath() + "/" + method.getName() + ".png"));
-                bos.write(screenshot);
-                bos.close();
-            } catch (Exception ex) {
-                System.err.println("Can't take screenshot");
-            } finally {
-                try {
-                    bos.close();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-
-            try {
-                bw = new BufferedWriter(new FileWriter(testOutput.getAbsolutePath() + "/" + method.getName() + ".html"));
-                bw.write(browser.getPageSource());
-                bw.close();
-            } catch (Exception ex) {
-                System.err.println("Can't save HTML");
-            } finally {
-                try {
-                    bw.close();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }
-    };
+//    @Rule
+//    public MethodRule watchman = new TestWatchman() {
+//        @Override
+//        public void failed(Throwable e, FrameworkMethod method) {
+//            BufferedOutputStream bos = null;
+//            BufferedWriter bw = null;
+//            File testOutput = new File("target/test-output");
+//            if (!testOutput.exists()) {
+//                testOutput.mkdirs();
+//            }
+//            try {// HTMLUnit can't maximize a window or take a screenshot
+//                browser.manage().window().maximize();
+//                //WebDriver augmentedDriver = new Augmenter().augment(browser);
+//                byte[] screenshot = ((TakesScreenshot) browser).getScreenshotAs(OutputType.BYTES);
+//                //byte[] screenshot = ((TakesScreenshot) browser).getScreenshotAs(OutputType.BYTES);
+//                bos = new BufferedOutputStream(new FileOutputStream(testOutput.getAbsolutePath() + "/" + method.getName() + ".png"));
+//                bos.write(screenshot);
+//                bos.close();
+//            } catch (Exception ex) {
+//                System.err.println("Can't take screenshot");
+//            } finally {
+//                try {
+//                    bos.close();
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+//
+//            try {
+//                bw = new BufferedWriter(new FileWriter(testOutput.getAbsolutePath() + "/" + method.getName() + ".html"));
+//                bw.write(browser.getPageSource());
+//                bw.close();
+//            } catch (Exception ex) {
+//                System.err.println("Can't save HTML");
+//            } finally {
+//                try {
+//                    bw.close();
+//                } catch (Exception ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+//        }
+//    };
 
     private static String PROPERTY_FILE = "/ftest.properties";
 
@@ -107,7 +107,7 @@ public abstract class SeamGrapheneTest {
     private static Properties properties = new Properties();
 
     @Drone
-    public WebDriver browser;
+    protected WebDriver browser;
 
     public static String getProperty(String key, Object... args) {
         if (!propertiesLoaded) {

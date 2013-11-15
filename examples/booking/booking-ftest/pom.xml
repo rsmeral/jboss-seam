@@ -13,7 +13,7 @@
     <name>Booking Functional Tests Module (EE6)</name>
     
     <properties>
-        <version.org.jboss.arquillian.extension.drone>1.2.0.Alpha2</version.org.jboss.arquillian.extension.drone>
+        <version.org.jboss.arquillian.extension.drone>1.2.0.Final</version.org.jboss.arquillian.extension.drone>
         <testDeployment>${basedir}/../booking-ear/target/seam-booking.ear</testDeployment>
         <browserCapabilities>firefox</browserCapabilities>
         <appUrl>http://seamsoak-wfkqa.rhcloud.com/</appUrl>
@@ -21,6 +21,14 @@
    
     <dependencyManagement>
         <dependencies>
+            
+            <dependency>
+                <groupId>org.jboss.arquillian.selenium</groupId>
+                <artifactId>selenium-bom</artifactId>
+                <version>2.35.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             
             <dependency>
                 <groupId>org.jboss.arquillian.extension</groupId>
@@ -63,13 +71,6 @@
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
-            <artifactId>htmlunit</artifactId>
-            <version>2.12</version>
             <scope>test</scope>
         </dependency>
         

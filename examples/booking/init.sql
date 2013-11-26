@@ -1,11 +1,11 @@
 alter table Booking drop foreign key FK_booking_hotel;
 alter table Booking drop foreign key FK_booking_user;
 
-drop table Booking if exists;
-drop table Customer if exists;
-drop table Hotel if exists;
+drop table if exists Booking ;
+drop table if exists Customer ;
+drop table if exists Hotel ;
 
-drop sequence hibernate_sequence;
+-- drop sequence hibernate_sequence;
 
 create table Booking (
     id bigint not null,
@@ -44,7 +44,7 @@ create table Hotel (
 alter table Booking add constraint FK_booking_hotel foreign key (hotel_id) references Hotel;
 alter table Booking add constraint FK_booking_user foreign key (user_username) references Customer;
 
-create sequence hibernate_sequence start with 1 increment by 1;
+-- create sequence hibernate_sequence start with 1 increment by 1;
 
 
 insert into Customer (username, password, name) values ('demo1', 'demodemo', 'Demo User');

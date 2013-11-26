@@ -1,5 +1,5 @@
-alter table Booking drop constraint FK_booking_hotel;
-alter table Booking drop constraint FK_booking_user;
+alter table Booking drop foreign key FK_booking_hotel;
+alter table Booking drop foreign key FK_booking_user;
 
 drop table Booking if exists;
 drop table Customer if exists;

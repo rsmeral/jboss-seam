@@ -61,7 +61,7 @@ public class SimpleBookingTest extends BookingFunctionalTestBase {
         int confirmationNumber;
         confirmationNumber = bookHotel(hotelName);
         assertTrue("Booking with confirmation number " + confirmationNumber + " not found.",
-                isElementPresent(getBy("BOOKING_TABLE_ITEM", Integer.valueOf(confirmationNumber).toString(), hotelName)));
+                isElementPresent(getBy("BOOKING_TABLE_ITEM", String.valueOf(confirmationNumber), hotelName)));
         cancelBooking(hotelName, confirmationNumber);
     }
 
@@ -109,13 +109,13 @@ public class SimpleBookingTest extends BookingFunctionalTestBase {
         // assert that there bookings are listed in hotel booking list
         for (int i = 0; i < 3; i++) {
             assertTrue("Expected booking #" + i + " not present", isElementPresent(
-                    getBy("BOOKING_TABLE_ITEM", Integer.valueOf(confirmationNumbers[i]).toString(), hotelNames[i])));
+                    getBy("BOOKING_TABLE_ITEM", String.valueOf(confirmationNumbers[i]), hotelNames[i])));
         }
         // cancel all the reservations
         for (int i = 2; i >= 0; i--) {
-            clickAndWaitHttp(getBy("BOOKING_TABLE_ITEM_LINK", Integer.valueOf(confirmationNumbers[i]), hotelNames[i]));
+            clickAndWaitHttp(getBy("BOOKING_TABLE_ITEM_LINK", String.valueOf(confirmationNumbers[i]), hotelNames[i]));
             assertTrue("Booking canceling failed", isTextInSource(
-                    getProperty("BOOKING_CANCELLED_MESSAGE", Integer.valueOf(confirmationNumbers[i]).toString())));
+                    getProperty("BOOKING_CANCELLED_MESSAGE", String.valueOf(confirmationNumbers[i]))));
         }
 
     }

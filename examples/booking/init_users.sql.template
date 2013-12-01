@@ -1,0 +1,1 @@
+insert into Customer (username, password, name) values ('demo@USERNUMBER@', 'demodemo', 'Demo User');

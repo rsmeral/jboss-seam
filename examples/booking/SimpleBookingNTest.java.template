@@ -1,0 +1,17 @@
+package org.jboss.seam.example.test.booking.graphene;
+
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit.Arquillian;
+import org.junit.runner.RunWith;
+
+@RunAsClient
+@RunWith(Arquillian.class)
+@Repeat(@REPEATNUMBER@)
+public class SimpleBooking@USERNUMBER@Test extends SimpleBookingTestBase {
+
+    @Override
+    public int userNumber() {
+        return @USERNUMBER@;
+    }
+    
+}

@@ -36,11 +36,17 @@ import org.junit.Before;
  * @author jharting
  *
  */
-public class BookingFunctionalTestBase extends SeamGrapheneTest {
+public abstract class BookingFunctionalTestBase extends SeamGrapheneTest {
 
-    protected final String DEFAULT_USERNAME = System.getProperty("appUser");
+    //protected final String DEFAULT_USERNAME = System.getProperty("appUser");
     protected final String DEFAULT_PASSWORD = "demodemo";
 
+    public abstract int userNumber();
+    
+    public String defaultUsername() {
+        return "demo" + userNumber();
+    }
+    
 //    @Deployment(testable = false)
 //    public static Archive<?> createDeployment() {
 //        return DeploymentResolver.createDeployment();
@@ -64,7 +70,7 @@ public class BookingFunctionalTestBase extends SeamGrapheneTest {
     }
 
     public boolean login() {
-        return login(DEFAULT_USERNAME, DEFAULT_PASSWORD);
+        return login(defaultUsername(), DEFAULT_PASSWORD);
     }
 
     public boolean login(String username, String password) {

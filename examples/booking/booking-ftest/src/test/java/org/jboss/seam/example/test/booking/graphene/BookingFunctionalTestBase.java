@@ -24,10 +24,11 @@ package org.jboss.seam.example.test.booking.graphene;
 import com.google.common.base.Predicate;
 import java.net.MalformedURLException;
 import java.net.URL;
-import static org.jboss.arquillian.graphene.Graphene.*;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
@@ -39,6 +40,8 @@ public abstract class BookingFunctionalTestBase extends SeamGrapheneTest {
 
     //protected final String DEFAULT_USERNAME = System.getProperty("appUser");
     protected final String DEFAULT_PASSWORD = "demodemo";
+
+    private static final int TIMEOUT = 10;
 
     public abstract int userNumber();
 
@@ -103,12 +106,13 @@ public abstract class BookingFunctionalTestBase extends SeamGrapheneTest {
     public void enterSearchQueryUsingAJAX(String query, boolean click) {
         setTextInputValue(getBy("SEARCH_STRING_FIELD"), query.substring(0, query.length() - 1));
         type(getBy("SEARCH_STRING_FIELD"), query.substring(query.length() - 1), false);
-        waitModel(browser).until().element(getBy("SPINNER")).is().not().visible();// ugly
-        waitModel(browser).until(new Predicate() {
-            public boolean apply(Object input) {
-                return isElementPresent(getBy("SEARCH_RESULT_TABLE")) || isElementPresent(getBy("NO_HOTELS_FOUND"));
-            }
-        });
+        new WebDriverWait(browser, TIMEOUT).until(ExpectedConditions.invisibilityOfElementLocated(getBy("SPINNER")));
+        new WebDriverWait(browser, TIMEOUT).until(
+                new Predicate() {
+                    public boolean apply(Object input) {
+                        return isElementPresent(getBy("SEARCH_RESULT_TABLE")) || isElementPresent(getBy("NO_HOTELS_FOUND"));
+                    }
+                });
     }
 
     public void enterSearchQueryWithoutAJAX(String query) {

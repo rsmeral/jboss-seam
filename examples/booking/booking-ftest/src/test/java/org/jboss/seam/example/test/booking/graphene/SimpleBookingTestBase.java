@@ -42,7 +42,6 @@ import org.junit.runners.model.Statement;
  */
 @RunAsClient
 @RunWith(Arquillian.class)
-@Repeat(10)
 public abstract class SimpleBookingTestBase extends BookingFunctionalTestBase {
     
     @ClassRule

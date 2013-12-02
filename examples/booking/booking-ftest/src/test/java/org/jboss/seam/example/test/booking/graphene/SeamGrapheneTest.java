@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Properties;
-import static org.jboss.arquillian.graphene.Graphene.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NotFoundException;
@@ -168,11 +167,11 @@ public abstract class SeamGrapheneTest {
     }
 
     public void clickAndWaitHttp(By by) {
-        guardHttp(browser.findElement(by)).click();
+        browser.findElement(by).click();
     }
 
     public void clickAndWaitAjax(By by) {
-        guardAjax(browser.findElement(by)).click();
+        browser.findElement(by).click();
     }
 
     public void type(By by, CharSequence text, boolean clear) {

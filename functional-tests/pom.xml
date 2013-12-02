@@ -25,13 +25,6 @@
             <artifactId>arquillian-junit-container</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.jboss.arquillian.graphene</groupId>
-            <artifactId>graphene-webdriver</artifactId>
-            <version>${version.graphene}</version>
-            <type>pom</type>
-        </dependency>
-
     </dependencies>
 
 </project>

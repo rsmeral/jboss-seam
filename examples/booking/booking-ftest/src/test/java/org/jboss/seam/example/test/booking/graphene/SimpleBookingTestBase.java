@@ -107,10 +107,10 @@ public abstract class SimpleBookingTestBase extends BookingFunctionalTestBase {
     public void invalidDatesTest() {
         String hotelName = "W Hotel";
         enterSearchQuery(hotelName);
-        clickAndWaitHttp(getBy("SEARCH_RESULT_TABLE_FIRST_ROW_LINK"));
+        browser.findElement(getBy("SEARCH_RESULT_TABLE_FIRST_ROW_LINK")).click();
 
         // hotel page
-        clickAndWaitHttp(getBy("BOOKING_BOOK"));
+        browser.findElement(getBy("BOOKING_BOOK")).click();
 
         // booking page
         String checkOut = browser.findElement(getBy("HOTEL_CHECKOUT_DATE_FIELD")).getAttribute("value");
@@ -118,12 +118,12 @@ public abstract class SimpleBookingTestBase extends BookingFunctionalTestBase {
 
         // switch check in and check out date
         setTextInputValue(getBy("HOTEL_CHECKIN_DATE_FIELD"), checkOut);
-        clickAndWaitHttp(getBy("HOTEL_PROCEED"));
+        browser.findElement(getBy("HOTEL_PROCEED")).click();
         assertTrue("Date verification #1 failed.", isTextInSource(getProperty("BOOKING_INVALID_DATE_MESSAGE1")));
         assertTrue("Check-out date error message expected.", isElementPresent(getBy("HOTEL_CHECKOUT_DATE_MESSAGE")));
         // set check in to past
         setTextInputValue(getBy("HOTEL_CHECKIN_DATE_FIELD"), "01/01/1970");
-        clickAndWaitHttp(getBy("HOTEL_PROCEED"));
+        browser.findElement(getBy("HOTEL_PROCEED")).click();
         assertTrue("Date verification #2 failed.", isTextInSource(getProperty("BOOKING_INVALID_DATE_MESSAGE2")));
         assertTrue("Checkin-date error message expected.", isElementPresent(getBy("HOTEL_CHECKIN_DATE_MESSAGE")));
     }
@@ -148,7 +148,7 @@ public abstract class SimpleBookingTestBase extends BookingFunctionalTestBase {
         }
         // cancel all the reservations
         for (int i = 2; i >= 0; i--) {
-            clickAndWaitHttp(getBy("BOOKING_TABLE_ITEM_LINK", String.valueOf(confirmationNumbers[i]), hotelNames[i]));
+            browser.findElement(getBy("BOOKING_TABLE_ITEM_LINK", String.valueOf(confirmationNumbers[i]), hotelNames[i])).click();
             assertTrue("Booking canceling failed", isTextInSource(
                     getProperty("BOOKING_CANCELLED_MESSAGE", String.valueOf(confirmationNumbers[i]))));
         }
@@ -163,17 +163,17 @@ public abstract class SimpleBookingTestBase extends BookingFunctionalTestBase {
             open(contextPath + getProperty("MAIN_PAGE"));
         }
         enterSearchQuery(hotelName);
-        clickAndWaitHttp(getBy("SEARCH_RESULT_TABLE_FIRST_ROW_LINK"));
+        browser.findElement(getBy("SEARCH_RESULT_TABLE_FIRST_ROW_LINK")).click();
 
         // booking page
-        clickAndWaitHttp(getBy("BOOKING_BOOK"));
+        browser.findElement(getBy("BOOKING_BOOK")).click();
 
         // hotel page
         populateBookingFields(bed, smoking, creditCard, creditCardName);
-        clickAndWaitHttp(getBy("HOTEL_PROCEED"));
+        browser.findElement(getBy("HOTEL_PROCEED")).click();
 
         // confirm page
-        clickAndWaitHttp(getBy("HOTEL_CONFIRM"));
+        browser.findElement(getBy("HOTEL_CONFIRM")).click();
 
         // main page
         String message = getText(getBy("HOTEL_MESSAGE"));
@@ -191,9 +191,9 @@ public abstract class SimpleBookingTestBase extends BookingFunctionalTestBase {
     protected void populateBookingFields(int bed, int smoking, String creditCard, String creditCardName) {
         selectByValue(getBy("HOTEL_BED_FIELD"), bed);
         if (smoking == 1) {
-            click(getBy("HOTEL_SMOKING_1"));
+            browser.findElement(getBy("HOTEL_SMOKING_1")).click();
         } else {
-            click(getBy("HOTEL_SMOKING_2"));
+            browser.findElement(getBy("HOTEL_SMOKING_2")).click();
         }
         type(getBy("HOTEL_CREDIT_CARD"), creditCard);
         type(getBy("HOTEL_CREDIT_CARD_NAME"), creditCardName);
@@ -204,6 +204,6 @@ public abstract class SimpleBookingTestBase extends BookingFunctionalTestBase {
     }
     
     protected void cancelBooking(String hotelName, int confirmationNumber) {
-        clickAndWaitHttp(getBy("BOOKING_TABLE_ITEM_LINK", String.valueOf(confirmationNumber), hotelName));
+        browser.findElement(getBy("BOOKING_TABLE_ITEM_LINK", String.valueOf(confirmationNumber), hotelName)).click();
     }
 }

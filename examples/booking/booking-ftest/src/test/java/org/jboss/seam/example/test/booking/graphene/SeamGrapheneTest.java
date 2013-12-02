@@ -21,26 +21,14 @@
  */
 package org.jboss.seam.example.test.booking.graphene;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Properties;
-import org.jboss.arquillian.drone.api.annotation.Drone;
 import static org.jboss.arquillian.graphene.Graphene.*;
-import org.junit.Rule;
-import org.junit.rules.MethodRule;
-import org.junit.rules.TestWatchman;
-import org.junit.runners.model.FrameworkMethod;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -107,7 +95,7 @@ public abstract class SeamGrapheneTest {
 
     private static Properties properties = new Properties();
     
-    protected WebDriver browser = new HtmlUnitDriver();
+    protected WebDriver browser = new HtmlUnitDriver(true);
 
     public static String getProperty(String key, Object... args) {
         if (!propertiesLoaded) {

@@ -41,25 +41,24 @@ public abstract class BookingFunctionalTestBase extends SeamGrapheneTest {
     protected final String DEFAULT_PASSWORD = "demodemo";
 
     public abstract int userNumber();
-    
+
     public String defaultUsername() {
         return "demo" + userNumber();
     }
-    
+
 //    @Deployment(testable = false)
 //    public static Archive<?> createDeployment() {
 //        return DeploymentResolver.createDeployment();
 //    }
-    
     protected URL contextPath;
-    
+
     @Before
     public void setUp() {
         try {
             contextPath = new URL(System.getProperty("appUrl"));
         } catch (MalformedURLException ex) {
         }
-        
+
         assertTrue("Login failed.", login());
     }
 
@@ -82,18 +81,14 @@ public abstract class BookingFunctionalTestBase extends SeamGrapheneTest {
         }
         type(getBy("LOGIN_USERNAME_FIELD"), username);
         type(getBy("LOGIN_PASSWORD_FIELD"), password);
-        if ("TRUE".equalsIgnoreCase(getProperty("USE_AJAX_LOGIN"))) {
-           clickAndWaitAjax(getBy("LOGIN_SUBMIT"));
-        }
-        else {
-           clickAndWaitHttp(getBy("LOGIN_SUBMIT"));
-        }
+        browser.findElement(getBy("LOGIN_SUBMIT")).click();
+
         return isLoggedIn();
     }
 
     public void logout() {
         if (isLoggedIn()) {
-            clickAndWaitHttp(getBy("LOGOUT"));
+            browser.findElement(getBy("LOGOUT")).click();
         }
     }
 
@@ -102,23 +97,12 @@ public abstract class BookingFunctionalTestBase extends SeamGrapheneTest {
     }
 
     public void enterSearchQuery(String query) {
-        if ("FALSE".equalsIgnoreCase(getProperty("USE_AJAX_SEARCH"))) {
-            enterSearchQueryWithoutAJAX(query);
-        } else {
-            if ("TRUE".equalsIgnoreCase(getProperty("USE_SEARCH_BUTTON"))) {
-                enterSearchQueryUsingAJAX(query, true);
-            } else {
-                enterSearchQueryUsingAJAX(query, false);
-            }
-        }
+        enterSearchQueryUsingAJAX(query, false);
     }
 
     public void enterSearchQueryUsingAJAX(String query, boolean click) {
         setTextInputValue(getBy("SEARCH_STRING_FIELD"), query.substring(0, query.length() - 1));
         type(getBy("SEARCH_STRING_FIELD"), query.substring(query.length() - 1), false);
-        if (click) {
-            clickAndWaitAjax(getBy("SEARCH_SUBMIT"));
-        }
         waitModel(browser).until().element(getBy("SPINNER")).is().not().visible();// ugly
         waitModel(browser).until(new Predicate() {
             public boolean apply(Object input) {

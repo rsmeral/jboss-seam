@@ -32,6 +32,8 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.junit.runners.model.Statement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * This class tests booking functionality of the example.
@@ -173,6 +175,7 @@ public abstract class SimpleBookingTestBase extends BookingFunctionalTestBase {
 
         // confirm page
         browser.findElement(getBy("HOTEL_CONFIRM")).click();
+        new WebDriverWait(browser, TIMEOUT).until(ExpectedConditions.presenceOfElementLocated(getBy("HOTEL_MESSAGE")));
 
         // main page
         String message = getText(getBy("HOTEL_MESSAGE"));

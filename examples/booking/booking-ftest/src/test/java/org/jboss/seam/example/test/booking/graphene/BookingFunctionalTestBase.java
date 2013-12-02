@@ -41,7 +41,7 @@ public abstract class BookingFunctionalTestBase extends SeamGrapheneTest {
     //protected final String DEFAULT_USERNAME = System.getProperty("appUser");
     protected final String DEFAULT_PASSWORD = "demodemo";
 
-    private static final int TIMEOUT = 10;
+    protected static final int TIMEOUT = 10;
 
     public abstract int userNumber();
 

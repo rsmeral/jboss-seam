@@ -21,10 +21,20 @@
  */
 package org.jboss.seam.example.test.booking.graphene;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.Properties;
+import org.junit.Rule;
+import org.junit.rules.TestRule;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NotFoundException;
@@ -42,49 +52,41 @@ import org.openqa.selenium.support.ui.Select;
  */
 public abstract class SeamGrapheneTest {
 
-//    @Rule
-//    public MethodRule watchman = new TestWatchman() {
-//        @Override
-//        public void failed(Throwable e, FrameworkMethod method) {
-//            BufferedOutputStream bos = null;
-//            BufferedWriter bw = null;
-//            File testOutput = new File("target/test-output");
-//            if (!testOutput.exists()) {
-//                testOutput.mkdirs();
-//            }
-//            try {// HTMLUnit can't maximize a window or take a screenshot
-//                browser.manage().window().maximize();
-//                //WebDriver augmentedDriver = new Augmenter().augment(browser);
-//                byte[] screenshot = ((TakesScreenshot) browser).getScreenshotAs(OutputType.BYTES);
-//                //byte[] screenshot = ((TakesScreenshot) browser).getScreenshotAs(OutputType.BYTES);
-//                bos = new BufferedOutputStream(new FileOutputStream(testOutput.getAbsolutePath() + "/" + method.getName() + ".png"));
-//                bos.write(screenshot);
-//                bos.close();
-//            } catch (Exception ex) {
-//                System.err.println("Can't take screenshot");
-//            } finally {
-//                try {
-//                    bos.close();
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//
-//            try {
-//                bw = new BufferedWriter(new FileWriter(testOutput.getAbsolutePath() + "/" + method.getName() + ".html"));
-//                bw.write(browser.getPageSource());
-//                bw.close();
-//            } catch (Exception ex) {
-//                System.err.println("Can't save HTML");
-//            } finally {
-//                try {
-//                    bw.close();
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                }
-//            }
-//        }
-//    };
+    @Rule
+    public TestRule watchman = new TestWatcher() {
+
+        private static final int MAX_FILES = 20;
+
+        @Override
+        public void failed(Throwable e, Description d) {
+            BufferedWriter bw = null;
+            File testOutput = new File("target/test-output");
+            if (!testOutput.exists()) {
+                testOutput.mkdirs();
+            }
+
+            // delete the oldest file
+            String[] fileNames = testOutput.list();
+            if (fileNames.length == MAX_FILES) {
+                Arrays.sort(fileNames);
+                new File(testOutput, fileNames[0]).delete();
+            }
+
+            try {
+                File fileToWrite = new File(testOutput, System.currentTimeMillis() + "_" + d.getMethodName());
+                bw = new BufferedWriter(new FileWriter(fileToWrite));
+                bw.write(browser.getPageSource());
+                bw.close();
+            } catch (Exception ex) {
+                System.err.println("Can't save HTML");
+            } finally {
+                try {
+                    bw.close();
+                } catch (Exception ex) {
+                }
+            }
+        }
+    };
 
     private static String PROPERTY_FILE = "/ftest.properties";
 
@@ -93,7 +95,7 @@ public abstract class SeamGrapheneTest {
     private static boolean propertiesExist = false;
 
     private static Properties properties = new Properties();
-    
+
     protected WebDriver browser = new HtmlUnitDriver(true);
 
     public static String getProperty(String key, Object... args) {

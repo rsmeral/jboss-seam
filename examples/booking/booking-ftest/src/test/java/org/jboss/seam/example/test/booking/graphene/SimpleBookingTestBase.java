@@ -204,6 +204,6 @@ public abstract class SimpleBookingTestBase extends BookingFunctionalTestBase {
     }
     
     protected void cancelBooking(String hotelName, int confirmationNumber) {
-        clickAndWaitHttp(getBy("BOOKING_TABLE_ITEM_LINK", confirmationNumber, hotelName));
+        clickAndWaitHttp(getBy("BOOKING_TABLE_ITEM_LINK", String.valueOf(confirmationNumber), hotelName));
     }
 }

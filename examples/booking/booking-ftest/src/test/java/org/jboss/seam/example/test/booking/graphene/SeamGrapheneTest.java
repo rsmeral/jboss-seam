@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.seam.example.common.test;
+package org.jboss.seam.example.test.booking.graphene;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
@@ -43,6 +43,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 
 /**
@@ -105,9 +106,8 @@ public abstract class SeamGrapheneTest {
     private static boolean propertiesExist = false;
 
     private static Properties properties = new Properties();
-
-    @Drone
-    protected WebDriver browser;
+    
+    protected WebDriver browser = new HtmlUnitDriver();
 
     public static String getProperty(String key, Object... args) {
         if (!propertiesLoaded) {

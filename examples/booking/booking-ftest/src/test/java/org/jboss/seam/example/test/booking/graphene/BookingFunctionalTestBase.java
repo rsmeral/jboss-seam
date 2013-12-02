@@ -25,7 +25,6 @@ import com.google.common.base.Predicate;
 import java.net.MalformedURLException;
 import java.net.URL;
 import static org.jboss.arquillian.graphene.Graphene.*;
-import org.jboss.seam.example.common.test.SeamGrapheneTest;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;

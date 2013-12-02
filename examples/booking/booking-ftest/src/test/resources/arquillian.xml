@@ -15,8 +15,8 @@
         </configuration>
     </container>
 
-    <extension qualifier="webdriver">
+    <!--<extension qualifier="webdriver">
         <property name="browser">${browserCapabilities}</property>
-    </extension>
+    </extension>-->
 
 </arquillian>

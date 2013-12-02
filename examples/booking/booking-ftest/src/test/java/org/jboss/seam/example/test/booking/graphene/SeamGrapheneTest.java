@@ -21,13 +21,12 @@
  */
 package org.jboss.seam.example.test.booking.graphene;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Properties;
@@ -55,11 +54,12 @@ public abstract class SeamGrapheneTest {
     @Rule
     public TestRule watchman = new TestWatcher() {
 
-        private static final int MAX_FILES = 20;
+        private static final int MAX_FILES = 40;
 
         @Override
         public void failed(Throwable e, Description d) {
             BufferedWriter bw = null;
+            PrintWriter pw = null;
             File testOutput = new File("target/test-output");
             if (!testOutput.exists()) {
                 testOutput.mkdirs();
@@ -70,18 +70,31 @@ public abstract class SeamGrapheneTest {
             if (fileNames.length == MAX_FILES) {
                 Arrays.sort(fileNames);
                 new File(testOutput, fileNames[0]).delete();
+                new File(testOutput, fileNames[1]).delete();
             }
 
             try {
-                File fileToWrite = new File(testOutput, System.currentTimeMillis() + "_" + d.getMethodName());
+                long currentTime = System.currentTimeMillis();
+                
+                File fileToWrite = new File(testOutput, currentTime + "_" + d.getMethodName() + "_source.html");
                 bw = new BufferedWriter(new FileWriter(fileToWrite));
                 bw.write(browser.getPageSource());
                 bw.close();
+                
+                File txtToWrite = new File(testOutput, currentTime + "_" + d.getMethodName() + "_report.txt");
+                bw = new BufferedWriter(new FileWriter(txtToWrite));
+                pw = new PrintWriter(bw);
+                pw.println(e.getMessage());
+                pw.println();
+                e.printStackTrace(pw);
+                bw.close();
+                pw.close();
             } catch (Exception ex) {
-                System.err.println("Can't save HTML");
+                System.err.println("Can't save HTML/report");
             } finally {
                 try {
                     bw.close();
+                    pw.close();
                 } catch (Exception ex) {
                 }
             }

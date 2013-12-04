@@ -24,7 +24,7 @@ package org.jboss.seam.example.test.booking.graphene;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.junit.Arquillian;
+//import org.jboss.arquillian.junit.Arquillian;
 import static org.junit.Assert.*;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -42,8 +42,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author jharting
  *
  */
-@RunAsClient
-@RunWith(Arquillian.class)
+
 public abstract class SimpleBookingTestBase extends BookingFunctionalTestBase {
     
     @ClassRule

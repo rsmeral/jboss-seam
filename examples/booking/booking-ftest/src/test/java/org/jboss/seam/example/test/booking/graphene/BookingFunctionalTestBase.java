@@ -100,7 +100,7 @@ public abstract class BookingFunctionalTestBase extends SeamGrapheneTest {
     }
 
     public void enterSearchQuery(String query) {
-        enterSearchQueryUsingAJAX(query, false);
+        enterSearchQueryWithoutAJAX(query);
     }
 
     public void enterSearchQueryUsingAJAX(String query, boolean click) {
@@ -117,6 +117,6 @@ public abstract class BookingFunctionalTestBase extends SeamGrapheneTest {
 
     public void enterSearchQueryWithoutAJAX(String query) {
         type(getBy("SEARCH_STRING_FIELD"), query);
-        clickAndWaitHttp(getBy("SEARCH_SUBMIT"));
+        browser.findElement(getBy("SEARCH_SUBMIT")).click();
     }
 }

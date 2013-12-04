@@ -4,9 +4,9 @@
 	  			xmlns:h="http://java.sun.com/jsf/html"
 	  			xmlns:f="http://java.sun.com/jsf/core"
 	  			xmlns:s="http://jboss.org/schema/seam/taglib"
-                xmlns:a="http://richfaces.org/a4j"
                 xmlns:rich="http://richfaces.org/rich"
 				template="template.xhtml">
+                <!--xmlns:a="http://richfaces.org/a4j"-->
 
 <!-- content -->
 <ui:define name="content">
@@ -55,14 +55,14 @@
 		<s:decorate id="creditCardDecorate" template="edit.xhtml">
 			<ui:define name="label">Credit Card #:</ui:define>
 			<h:inputText id="creditCard" value="#{booking.creditCard}" required="true">
-				<a:ajax event="blur" render="creditCardDecorate"/>
+				<!--<a:ajax event="blur" render="creditCardDecorate"/>-->
 			</h:inputText>
 		</s:decorate>
 
 		<s:decorate id="creditCardNameDecorate" template="edit.xhtml">
 			<ui:define name="label">Credit Card Name:</ui:define>
 			<h:inputText id="creditCardName" value="#{booking.creditCardName}" required="true">
-				<a:ajax event="blur" render="creditCardNameDecorate"/>
+				<!--<a:ajax event="blur" render="creditCardNameDecorate"/>-->
 			</h:inputText>
 		</s:decorate>
 

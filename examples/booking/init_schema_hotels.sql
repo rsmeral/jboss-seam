@@ -1,5 +1,5 @@
-alter table Booking drop foreign key FK_booking_hotel;
-alter table Booking drop foreign key FK_booking_user;
+alter table Booking drop constraint FK_booking_hotel;
+alter table Booking drop constraint FK_booking_user;
 
 drop table if exists Booking ;
 drop table if exists Customer ;
@@ -59,10 +59,10 @@ insert into Hotel (id, price, name, address, city, state, zip, country) values (
 insert into Hotel (id, price, name, address, city, state, zip, country) values (12, 200, 'Hilton Diagonal Mar', 'Passeig del Taulat 262-264', 'Barcelona', 'Catalunya', '08019', 'Spain');
 insert into Hotel (id, price, name, address, city, state, zip, country) values (13, 210, 'Hilton Tel Aviv', 'Independence Park', 'Tel Aviv', '', '63405', 'Israel');
 insert into Hotel (id, price, name, address, city, state, zip, country) values (14, 240, 'InterContinental Tokyo Bay', 'Takeshiba Pier', 'Tokyo', '', '105', 'Japan');
-insert into Hotel (id, price, name, address, city, state, zip, country) values (15, 130, 'Hotel Beaulac', ' Esplanade Léopold-Robert 2', 'Neuchatel', '', '2000', 'Switzerland');
+insert into Hotel (id, price, name, address, city, state, zip, country) values (15, 130, 'Hotel Beaulac', ' Esplanade Leopold-Robert 2', 'Neuchatel', '', '2000', 'Switzerland');
 insert into Hotel (id, price, name, address, city, state, zip, country) values (16, 140, 'Conrad Treasury Place', 'William & George Streets', 'Brisbane', 'QLD', '4001', 'Australia');
 insert into Hotel (id, price, name, address, city, state, zip, country) values (17, 230, 'Ritz Carlton', '1228 Sherbrooke St', 'West Montreal', 'Quebec', 'H3G1H6', 'Canada');
 insert into Hotel (id, price, name, address, city, state, zip, country) values (18, 460, 'Ritz Carlton', 'Peachtree Rd, Buckhead', 'Atlanta', 'GA', '30326', 'USA');
 insert into Hotel (id, price, name, address, city, state, zip, country) values (19, 220, 'Swissotel', '68 Market Street', 'Sydney', 'NSW', '2000', 'Australia');
-insert into Hotel (id, price, name, address, city, state, zip, country) values (20, 250, 'Meliá White House', 'Albany Street', 'Regents Park London', '', 'NW13UP', 'Great Britain');
+insert into Hotel (id, price, name, address, city, state, zip, country) values (20, 250, 'Melia White House', 'Albany Street', 'Regents Park London', '', 'NW13UP', 'Great Britain');
 insert into Hotel (id, price, name, address, city, state, zip, country) values (21, 210, 'Hotel Allegro', '171 West Randolph Street', 'Chicago', 'IL', '60601', 'USA');

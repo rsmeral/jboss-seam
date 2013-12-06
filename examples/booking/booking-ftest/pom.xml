@@ -13,10 +13,7 @@
     <name>Booking Functional Tests Module (EE6)</name>
     
     <properties>
-        <version.org.jboss.arquillian.extension.drone>1.2.0.Final</version.org.jboss.arquillian.extension.drone>
-        <testDeployment>${basedir}/../booking-ear/target/seam-booking.ear</testDeployment>
-        <browserCapabilities>firefox</browserCapabilities>
-        <appUrl>http://seamsoak-wfkqa.rhcloud.com/</appUrl>
+        <appUrl>ShouldBeSetOnCommandLine</appUrl>
     </properties>
    
     <dependencyManagement>
@@ -133,9 +130,8 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <argLine>-Xmx256m</argLine> 
                     <systemPropertyVariables>
-                        <testDeployment>${testDeployment}</testDeployment>
-                        <appUser>${appUser}</appUser>
                         <appUrl>${appUrl}</appUrl>
                     </systemPropertyVariables>
                 </configuration>
